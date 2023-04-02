@@ -13,6 +13,9 @@ export default {
   // The directory where Jest should store its cached dependency information
   // cacheDirectory: "/private/var/folders/vw/jpxh5xps19707qdgltpvw4w00000gn/T/jest_dx",
 
+  moduleNameMapper: {
+    'pact-msw': '<rootDir>/src/index',
+  },
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
   transform: {
@@ -35,7 +38,14 @@ export default {
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',
-
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 90,
+      lines: 80,
+      statements: -10,
+    },
+  },
   // A list of reporter names that Jest uses when writing coverage reports
   // coverageReporters: [
   //   "json",

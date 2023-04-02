@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
-
+    "baseUrl": "src",
+    "paths": {
+      "pact-msw": ["index.ts"]
+    },
     "resolveJsonModule": true,
     /* Basic Options */
     // "incremental": true,                   /* Enable incremental compilation */

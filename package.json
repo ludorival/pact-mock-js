@@ -1,7 +1,7 @@
 {
-  "name": "node-typescript-jest-template",
+  "name": "pact-msw",
   "version": "0.0.1",
-  "description": "A node module template using typescript and jest",
+  "description": "A Library to build Pact interactions by leveraging msw",
   "keywords": [
     "typescript",
     "template",
@@ -13,7 +13,7 @@
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ludorival/node-typescript-jest-template.git"
+    "url": "https://github.com/ludorival/pact-msw.git"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,8 +26,7 @@
     "changelog:update": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
     "clean": "(rm -r ./.nyc_output || true) && (rm -r ./coverage || true) && (rm -r ./dist || true)",
     "clean:all": "npm run clean && (rm -r ./node_modules || true)",
-    "cover": "jest --coverage",
-    "coverall": "jest --coverage && coveralls < coverage/lcov.info",
+    "cover": "yarn test --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "preversion": "npm run build && npm run cover:check",
     "postversion": "git push && git push --tags",
@@ -37,24 +36,32 @@
     "version": "npm run build && npm run changelog:update"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^3.2.2",
+    "@types/diff": "^5.0.3",
     "@types/jest": "29.5.0",
+    "@types/lodash": "^4.14.192",
     "@types/node": "18.15.11",
     "@typescript-eslint/eslint-plugin": "5.57.0",
     "@typescript-eslint/parser": "5.57.0",
-    "conventional-changelog-cli": "2.2.2",
-    "coveralls": "3.1.1",
+    "axios": "^1.3.4",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7.32.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "graphql": "^16.6.0",
     "jest": "29.5.0",
+    "msw": "^1.2.1",
     "prettier": "2.8.7",
     "ts-jest": "29.0.5",
     "ts-node": "10.9.1",
-    "eslint-plugin-prettier": "4.2.1",
     "typescript": "5.0.3"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "dependencies": {
+    "diff": "^5.1.0",
+    "lodash": "^4.17.21"
   }
 }
