@@ -48,7 +48,7 @@
     },
     "client": {
       "name": "pact-msw-handlers",
-      "version": "0.0.1"
+      "version": "0.0.3"
     }
   }
 }
