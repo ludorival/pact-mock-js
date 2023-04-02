@@ -1,6 +1,6 @@
 {
   "name": "pact-msw",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "A Library to build Pact interactions by leveraging msw",
   "keywords": [
     "typescript",
