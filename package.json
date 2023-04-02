@@ -1,6 +1,6 @@
 {
   "name": "pact-msw",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Library to build Pact interactions by leveraging msw",
   "keywords": [
     "typescript",
@@ -15,10 +15,10 @@
     "type": "git",
     "url": "https://github.com/ludorival/pact-msw.git"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "files": [
-    "dist/"
+    "dist/src"
   ],
   "scripts": {
     "build": "npm run clean && npm run lint && tsc",
@@ -61,7 +61,6 @@
     }
   },
   "dependencies": {
-    "diff": "^5.1.0",
     "lodash": "^4.17.21"
   }
 }
