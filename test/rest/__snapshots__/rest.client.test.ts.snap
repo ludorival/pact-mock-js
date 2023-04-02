@@ -131,7 +131,7 @@ exports[`To-Do list Rest API client todoById should get an error when getting a 
   "metadata": {
     "client": {
       "name": "pact-msw-handlers",
-      "version": "1.0.0",
+      "version": "1.0.1",
     },
     "pactSpecification": {
       "version": "2.0.0",
