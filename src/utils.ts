@@ -126,10 +126,9 @@ export const isNotTheSame = ({
     : true
 
   if (!isSame) {
-    throw new Error(
-      `The pact ${fileName} contains an interaction with same description ${
-        interaction.description
-      }.
+    const errorMessage = `The pact ${fileName} contains an interaction with same description ${
+      interaction.description
+    }.
 Previous interaction was 
 ${JSON.stringify(existingInteraction, null, 2)}
 Current interaction is
@@ -138,7 +137,8 @@ ${JSON.stringify(interaction, null, 2)}
 Make sure your mocks are deterministic. 
 You can use headersConfig options from your provider
 to exclude or include headers`
-    )
+    console.error(errorMessage)
+    throw new Error(errorMessage)
   }
   return !isSame
 }
