@@ -1,6 +1,6 @@
 {
   "name": "pact-msw",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "A Library to build Pact interactions by leveraging msw",
   "keywords": [
     "typescript",
@@ -29,7 +29,7 @@
     "clean:all": "npm run clean && (rm -r ./node_modules || true)",
     "cover": "yarn test --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "preversion": "npm run build && npm run cover:check",
+    "preversion": "yarn build && yarn cover -u",
     "postversion": "git push && git push --tags",
     "prepare": "npm run build",
     "test": "jest",
