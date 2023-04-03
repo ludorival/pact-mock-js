@@ -40,10 +40,11 @@ class PactProvider {
         this.addInteraction({
           description: interaction.description,
           providerState: interaction.providerState,
-          request: await toRequest(req, pact.headersConfig),
+          request: await toRequest(req, pact),
           response: {
             status: interaction.responseStatus || 200,
             body: response,
+            matchingRules: interaction.matchingRules,
           },
         })
       }

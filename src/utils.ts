@@ -23,9 +23,9 @@ const omitHeaders = (
 
 export const toRequest = async (
   req: MockedRequest,
-  headersConfig?: HeadersConfig
+  { headersConfig, basePath }: Pact
 ) => {
-  const path = req.url.pathname
+  const path = req.url.pathname.replace(basePath || '', '')
   const query = req.url.searchParams.toString() || undefined
   const body: Body = await req
     .json()

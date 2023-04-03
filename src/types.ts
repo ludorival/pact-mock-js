@@ -69,6 +69,7 @@ export type Pact = {
   provider: string
   folder?: string
   headersConfig?: HeadersConfig
+  basePath?: string
   pactSpecificationVersion?: '2.0.0'
 }
 

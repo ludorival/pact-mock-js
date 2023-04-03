@@ -40,6 +40,11 @@ export const multipleTodos = rest({
       completed: false,
     },
   ],
+  matchingRules: {
+    '$.body.data[*].id': {
+      match: 'type',
+    },
+  },
 })
 
 export const todoByIdFound = rest({

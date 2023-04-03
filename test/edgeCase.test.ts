@@ -9,6 +9,7 @@ const provider = pactProvider({
   consumer: 'movie-consumer',
   provider: 'movie-provider',
   folder: 'test/pacts',
+  basePath: '/base',
   headersConfig: {
     includes: ['content-type'],
   },

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const url = 'https://pact.msw.example.com/api'
+const url = 'https://pact.msw.example.com/base/api'
 export const fetchMovies = async () => {
   const response = await axios.get(`${url}/movies`).then((res) => res.data)
   return response
