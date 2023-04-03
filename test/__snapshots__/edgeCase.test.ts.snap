@@ -45,7 +45,7 @@ exports[`Edge case should fail if there is already a recorded interaction with a
   "metadata": {
     "client": {
       "name": "pact-msw-handlers",
-      "version": "1.0.1",
+      "version": "1.0.2",
     },
     "pactSpecification": {
       "version": "2.0.0",
