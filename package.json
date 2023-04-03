@@ -29,7 +29,6 @@
     "clean:all": "npm run clean && (rm -r ./node_modules || true)",
     "cover": "yarn test --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "preversion": "yarn build && yarn cover -u",
     "postversion": "git push && git push --tags",
     "prepare": "yarn build",
     "test": "jest",
