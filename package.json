@@ -29,7 +29,7 @@
     "clean:all": "npm run clean && (rm -r ./node_modules || true)",
     "cover": "yarn test --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "postversion": "yarn cover -u && git add test/**/*.snap && git push && git push --tags",
+    "postversion": "yarn cover -u && git add test/**/*.snap && git commit -m \"update snapshots after changing version\" && git push && git push --tags",
     "prepare": "yarn build",
     "test": "jest",
     "upgrade": "npx npm-check -u",
