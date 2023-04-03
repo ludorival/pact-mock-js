@@ -1,6 +1,6 @@
 {
   "name": "pact-msw",
-  "version": "1.2.0",
+  "version": "1.0.1",
   "description": "A Library to build Pact interactions by leveraging msw",
   "keywords": [
     "typescript",
@@ -29,11 +29,14 @@
     "clean:all": "npm run clean && (rm -r ./node_modules || true)",
     "cover": "yarn test --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "postversion": "git push && git push --tags",
+    "postversion": "yarn cover -u && git add test/*/¨.snap && git push && git push --tags",
     "prepare": "yarn build",
     "test": "jest",
     "upgrade": "npx npm-check -u",
-    "version": "yarn build && yarn cover -u"
+    "version": "yarn build",
+    "patch": "npm version patch",
+    "minor": "npm version minor",
+    "major": "npm version major"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^3.2.2",
