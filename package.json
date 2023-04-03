@@ -33,6 +33,7 @@
     "prepare": "yarn build",
     "test": "jest",
     "upgrade": "npx npm-check -u",
+    "preversion": "yarn test",
     "version": "yarn build",
     "patch": "npm version patch",
     "minor": "npm version minor",
