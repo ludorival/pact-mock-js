@@ -140,7 +140,7 @@ exports[`To-Do list Rest API client todoById should get an error when getting a 
   ],
   "metadata": {
     "client": {
-      "name": "pact-msw-handlers",
+      "name": "pact-msw",
       "version": "1.0.2",
     },
     "pactSpecification": {

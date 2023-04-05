@@ -9,6 +9,5 @@ export const deleteMovie = async (id: string) => {
   const response = await axios
     .delete(`${url}/movie/${id}`)
     .then((res) => res.data)
-    .catch((err) => err.response.data)
   return response
 }

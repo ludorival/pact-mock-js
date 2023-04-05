@@ -31,6 +31,7 @@ export type CommonRecordInteraction = {
   providerState?: string
   responseStatus?: number
   once?: boolean
+  strict?: boolean
   matchingRules?: MatchingRules
 }
 
@@ -70,6 +71,7 @@ export type Pact = {
   folder?: string
   headersConfig?: HeadersConfig
   basePath?: string
+  strict?: boolean
   pactSpecificationVersion?: '2.0.0'
 }
 
@@ -104,7 +106,7 @@ export type MetaData = {
     version: string
   }
   client: {
-    name: 'pact-msw-handlers'
+    name: 'pact-msw'
     version: string
   }
 }

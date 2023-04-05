@@ -239,7 +239,7 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
   ],
   "metadata": {
     "client": {
-      "name": "pact-msw-handlers",
+      "name": "pact-msw",
       "version": "1.0.2",
     },
     "pactSpecification": {

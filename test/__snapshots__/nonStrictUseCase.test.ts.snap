@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Non strict use case should fail if the interaction override the strict mode 1`] = `
+{
+  "consumer": {
+    "name": "test-consumer",
+  },
+  "interactions": [
+    {
+      "description": "should delete a movie",
+      "request": {
+        "body": undefined,
+        "headers": {},
+        "method": "DELETE",
+        "path": "/api/movie/1",
+        "query": undefined,
+      },
+      "response": {
+        "body": "deleted",
+        "matchingRules": undefined,
+        "status": 200,
+      },
+    },
+    {
+      "description": "should delete a movie",
+      "request": {
+        "body": undefined,
+        "headers": {},
+        "method": "DELETE",
+        "path": "/api/movie/2",
+        "query": undefined,
+      },
+      "response": {
+        "body": "deleted",
+        "matchingRules": undefined,
+        "status": 200,
+      },
+    },
+    {
+      "description": "should delete a movie - strict",
+      "request": {
+        "body": undefined,
+        "headers": {},
+        "method": "DELETE",
+        "path": "/api/movie/1",
+        "query": undefined,
+      },
+      "response": {
+        "body": "deleted",
+        "matchingRules": undefined,
+        "status": 200,
+      },
+    },
+  ],
+  "metadata": {
+    "client": {
+      "name": "pact-msw",
+      "version": "1.0.2",
+    },
+    "pactSpecification": {
+      "version": "2.0.0",
+    },
+  },
+  "provider": {
+    "name": "test-relax-provider",
+  },
+}
+`;

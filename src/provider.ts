@@ -22,6 +22,7 @@ class PactProvider {
     this.fileName = `${pact.folder || 'pacts'}/${pact.consumer}-${
       pact.provider
     }.json`
+    this.pact.strict = this.pact.strict ?? true
   }
 
   removePact() {
@@ -37,16 +38,23 @@ class PactProvider {
     const pact = this.pact
     return interactions.map((interaction) => {
       const onInterceptRequest = async (req: MockedRequest, response: Body) => {
-        this.addInteraction({
-          description: interaction.description,
-          providerState: interaction.providerState,
-          request: await toRequest(req, pact),
-          response: {
-            status: interaction.responseStatus || 200,
-            body: response,
-            matchingRules: interaction.matchingRules,
+        const strict =
+          interaction.strict !== undefined
+            ? interaction.strict
+            : this.pact.strict
+        this.addInteraction(
+          {
+            description: interaction.description,
+            providerState: interaction.providerState,
+            request: await toRequest(req, pact),
+            response: {
+              status: interaction.responseStatus || 200,
+              body: response,
+              matchingRules: interaction.matchingRules,
+            },
           },
-        })
+          strict
+        )
       }
       if (interaction.api == 'graphql') {
         return toGraphQLHandler({
@@ -61,16 +69,19 @@ class PactProvider {
     })
   }
 
-  private addInteraction(interaction: Interaction) {
+  private addInteraction(interaction: Interaction, strict?: boolean) {
     interaction = omitBy(interaction, isUndefined) as Interaction
     const existingInteraction = this.interactions.find(
       (i) => i.description === interaction.description
     )
-    const canAdd = isNotTheSame({
-      fileName: this.fileName,
-      existingInteraction,
-      interaction,
-    })
+
+    const canAdd = strict
+      ? isNotTheSame({
+          fileName: this.fileName,
+          existingInteraction,
+          interaction,
+        })
+      : true
     if (canAdd) this.interactions.push(interaction)
   }
 
@@ -78,13 +89,13 @@ class PactProvider {
     return {
       consumer: { name: this.pact.consumer },
       provider: { name: this.pact.provider },
-      interactions: uniqBy(this.interactions, 'description'),
+      interactions: this.interactions,
       metadata: {
         pactSpecification: {
           version: this.pact.pactSpecificationVersion || '2.0.0',
         },
         client: {
-          name: 'pact-msw-handlers',
+          name: 'pact-msw',
           version: pjson.version,
         },
       },
@@ -100,7 +111,11 @@ class PactProvider {
     return new PactProvider(pact)
   }
 }
-
+/**
+ * Create a new pact provider
+ * @param pact the configuration option to generate a Pact file
+ * @returns the pact for a given provider
+ */
 export function pactProvider(pact: Pact): PactProvider {
   return PactProvider.provider(pact)
 }
