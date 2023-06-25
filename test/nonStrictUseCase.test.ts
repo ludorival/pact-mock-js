@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { setupServer } from 'msw/node'
 import { pactProvider, rest } from 'pact-msw'
-import { deleteMovie, fetchMovies } from './movieApi'
+import { deleteMovie } from './movieApi'
 
 const server = setupServer()
 

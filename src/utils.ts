@@ -1,6 +1,5 @@
 import { omit } from 'lodash'
 import { MockedRequest } from 'msw'
-import path from 'path'
 import {
   Body,
   HeadersConfig,
@@ -48,10 +47,12 @@ type FileSystem = {
   rmSync: (filename: string, options: { recursive: boolean }) => void
 }
 let fs: FileSystem
+let path: { dirname: (filePath: string) => string }
 const checkIfNodeEnv = (): FileSystem | undefined => {
   if (!fs) {
     try {
       fs = require('fs')
+      path = require('path')
     } catch (e) {}
   }
   if (!fs?.existsSync) {

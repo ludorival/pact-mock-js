@@ -1,7 +1,7 @@
 import { MockedRequest, RequestHandler } from 'msw'
 import { AnyInteraction, Body, Interaction, Pact, PactFile } from './types'
 
-import { isUndefined, omitBy, uniqBy } from 'lodash'
+import _, { isUndefined, omitBy } from 'lodash'
 import pjson from '../package.json'
 import { toGraphQLHandler } from './graphqlHandler'
 import { toRestHandler } from './restHandler'
@@ -24,16 +24,25 @@ class PactProvider {
     }.json`
     this.pact.strict = this.pact.strict ?? true
   }
-
+  /**
+   * Remove the pact file if exists
+   */
   removePact() {
     deleteFile(this.fileName)
   }
-
+  /**
+   * Loads the pact file for this provider if exists in order to restore the list of recorded interatcions
+   * @param pactFile [Optional] a pactFile to provide to restore the list of interactions
+   */
   loadPact(pactFile: PactFile | undefined = readPact(this.fileName)) {
     ensureSamePact(this.pact, pactFile)
     this.interactions = pactFile?.interactions || []
   }
-
+  /**
+   * Transform a Pact interaction to a MSW handler
+   * @param interactions the Pact interactions to transform to MSW handler
+   * @returns the MSW handlers for each given interactions
+   */
   toHandlers(...interactions: AnyInteraction[]): Array<RequestHandler> {
     const pact = this.pact
     return interactions.map((interaction) => {
@@ -85,6 +94,9 @@ class PactProvider {
     if (canAdd) this.interactions.push(interaction)
   }
 
+  /**
+   * Gets the current Pact file
+   */
   public get pactFile(): PactFile {
     return {
       consumer: { name: this.pact.consumer },

@@ -35,9 +35,9 @@
     "upgrade": "npx npm-check -u",
     "preversion": "yarn test",
     "version": "yarn build",
-    "patch": "npm version patch",
-    "minor": "npm version minor",
-    "major": "npm version major"
+    "patch": "npm version patch --no-git-tag-version",
+    "minor": "npm version minor --no-git-tag-version",
+    "major": "npm version major --no-git-tag-version"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^3.2.2",
