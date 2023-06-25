@@ -55,7 +55,7 @@ exports[`Non strict use case should fail if the interaction override the strict 
   "metadata": {
     "client": {
       "name": "pact-msw",
-      "version": "1.0.3",
+      "version": "1.1.0",
     },
     "pactSpecification": {
       "version": "2.0.0",
