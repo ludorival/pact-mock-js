@@ -50,7 +50,7 @@ jobs:
       - name: Git status
         run: git status
         # Publishing to NPM
-      - uses: JS-DevTools/npm-publish@v1
+      - uses: JS-DevTools/npm-publish@v2
         with:
           token: ${{ secrets.NPM_TOKEN }}
 
