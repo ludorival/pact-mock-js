@@ -1,7 +1,11 @@
 {
-  "name": "pact-msw",
+  "name": "pact-mock-js",
   "version": "1.1.0",
-  "description": "A Library to build Pact interactions by leveraging msw",
+  "description": "A Library to build Pact interactions by leveraging existing mocks",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "keywords": [
     "typescript",
     "template",
@@ -13,7 +17,7 @@
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ludorival/pact-msw.git"
+    "url": "https://github.com/ludorival/pact-mock-js.git"
   },
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
@@ -22,7 +26,7 @@
     "dist/package.json"
   ],
   "scripts": {
-    "build": "npm run clean && npm run lint && tsc",
+    "build": "npm run clean && npm run lint && tsc -b packages/*",
     "changelog": "conventional-changelog -p angular -u",
     "changelog:update": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
     "clean": "(rm -r ./.nyc_output || true) && (rm -r ./coverage || true) && (rm -r ./dist || true)",
@@ -47,7 +51,6 @@
     "@types/node": "18.19.33",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-    "axios": "^1.3.4",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7.32.0",
     "eslint-plugin-prettier": "4.2.1",

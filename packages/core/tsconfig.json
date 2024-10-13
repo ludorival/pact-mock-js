@@ -1,0 +1,14 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+      "outDir": "dist",
+      "rootDir": "src",
+      "baseUrl": "src",
+
+    "paths": {
+      "@pact-mock-js/core": ["index.ts"]
+    },
+    },
+    "include": ["src", "src/types"]
+  }
+  
