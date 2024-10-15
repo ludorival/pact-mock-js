@@ -2,13 +2,11 @@ name: Build and Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     tags:
       - '*'
   pull_request:
-    branches: [ main ]
-
-
+    branches: [main]
 
 jobs:
   build:
@@ -24,8 +22,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install yarn
       - run: yarn install
+      - run: yarn build
       - run: yarn test
-
 
   deploy:
     needs: build
@@ -53,7 +51,6 @@ jobs:
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_TOKEN }}
-
 
   create-release:
     needs: deploy
