@@ -1,6 +1,6 @@
 {
   "name": "@pact-mock-js/msw",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@pact-mock-js/core": "1.0.0",
+    "@pact-mock-js/core": "0.0.1",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
