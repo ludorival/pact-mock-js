@@ -17,7 +17,7 @@ export default {
   // cacheDirectory: "/private/var/folders/vw/jpxh5xps19707qdgltpvw4w00000gn/T/jest_dx",
 
   moduleNameMapper: {
-    'pact-msw': '<rootDir>/src/index',
+    '@pact-mock-js/msw': '<rootDir>/src/index',
   },
 
   projects: ['<rootDir>/packages/*'],

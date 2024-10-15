@@ -3,7 +3,7 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "baseUrl": "src",
     "paths": {
-      "pact-msw": ["index.ts"]
+      "@pact-mock-js/msw": ["index.ts"]
     },
     "resolveJsonModule": true,
     /* Basic Options */
