@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`To-Do list GraphQL API client createTodo should create a new To-Do item 1`] = `
+{
+  "completed": false,
+  "description": "Milk, bread, eggs, cheese",
+  "id": "1",
+  "title": "Buy groceries",
+}
+`;
+
+exports[`To-Do list GraphQL API client fetchTodos should fetch all To-Do items 1`] = `
+[
+  {
+    "completed": false,
+    "description": "Milk, bread, eggs, cheese",
+    "id": "1",
+    "title": "Buy groceries",
+  },
+  {
+    "completed": true,
+    "description": "",
+    "id": "2",
+    "title": "Do laundry",
+  },
+  {
+    "completed": false,
+    "description": "Fix leaky faucet in the bathroom",
+    "id": "3",
+    "title": "Call plumber",
+  },
+]
+`;
+
+exports[`To-Do list GraphQL API client todoById should get a todo by its id 1`] = `
+{
+  "completed": false,
+  "description": "Milk, bread, eggs, cheese",
+  "id": "1",
+  "title": "Buy groceries",
+}
+`;
+
+exports[`To-Do list GraphQL API client todoById should get an error when getting a todo does not found it 1`] = `
+{
+  "consumer": {
+    "name": "test-consumer",
+  },
+  "interactions": [
+    {
+      "description": "empty todo list",
+      "request": {
+        "headers": {},
+        "method": "GET",
+        "path": "/api/todos",
+      },
+      "response": {
+        "body": [],
+        "status": 200,
+      },
+    },
+    {
+      "description": "graphql api returns a 500 http error",
+      "providerState": "will return a 500 http error",
+      "request": {
+        "headers": {},
+        "method": "GET",
+        "path": "/api/todos",
+      },
+      "response": {
+        "status": 500,
+      },
+    },
+    {
+      "description": "multiple todo list",
+      "request": {
+        "headers": {},
+        "method": "GET",
+        "path": "/api/todos",
+      },
+      "response": {
+        "body": [
+          {
+            "completed": false,
+            "description": "Milk, bread, eggs, cheese",
+            "id": "1",
+            "title": "Buy groceries",
+          },
+          {
+            "completed": true,
+            "description": "",
+            "id": "2",
+            "title": "Do laundry",
+          },
+          {
+            "completed": false,
+            "description": "Fix leaky faucet in the bathroom",
+            "id": "3",
+            "title": "Call plumber",
+          },
+        ],
+        "matchingRules": {
+          "$.body.data[*].id": {
+            "match": "type",
+          },
+        },
+        "status": 200,
+      },
+    },
+    {
+      "description": "should create a Todo with success",
+      "request": {
+        "body": {
+          "title": "Buy groceries",
+        },
+        "headers": {
+          "content-type": "application/json",
+        },
+        "method": "POST",
+        "path": "/api/todos",
+      },
+      "response": {
+        "body": {
+          "completed": false,
+          "description": "Milk, bread, eggs, cheese",
+          "id": "1",
+          "title": "Buy groceries",
+        },
+        "status": 201,
+      },
+    },
+    {
+      "description": "should found a todo item by its id",
+      "providerState": "there is an existing todo item with this id",
+      "request": {
+        "headers": {},
+        "method": "GET",
+        "path": "/api/todos/1",
+      },
+      "response": {
+        "body": {
+          "completed": false,
+          "description": "Milk, bread, eggs, cheese",
+          "id": "1",
+          "title": "Buy groceries",
+        },
+        "status": 200,
+      },
+    },
+    {
+      "description": "should not found a todo item by its id",
+      "request": {
+        "headers": {},
+        "method": "GET",
+        "path": "/api/todos/1",
+      },
+      "response": {
+        "body": {
+          "message": "The todo item 1 is not found",
+        },
+        "status": 404,
+      },
+    },
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0",
+    },
+  },
+  "provider": {
+    "name": "rest-provider",
+  },
+}
+`;

@@ -3,7 +3,7 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
     "baseUrl": "src",
     "paths": {
-      "pact-msw": ["index.ts"]
+      "@pact-mock-js/msw": ["index.ts"]
     },
     "resolveJsonModule": true,
     /* Basic Options */
@@ -68,6 +68,10 @@
 
     /* Advanced Options */
     "skipLibCheck": true,                     /* Skip type checking of declaration files. */
-    "forceConsistentCasingInFileNames": true  /* Disallow inconsistently-cased references to the same file. */
+    "forceConsistentCasingInFileNames": true,  /* Disallow inconsistently-cased references to the same file. */
+    "typeRoots": [
+      "./node_modules/@types", // Types installés au niveau racine
+      "./packages/*/node_modules/@types" // Types dans chaque sous-package
+    ]
   }
 }

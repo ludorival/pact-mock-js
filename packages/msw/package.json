@@ -1,0 +1,23 @@
+{
+  "name": "@pact-mock-js/msw",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest --testPathPattern='packages/msw'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@pact-mock-js/core": "1.0.0",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.192",
+    "axios": "^1.7.7",
+    "graphql": "^16.6.0",
+    "msw": "^1.2.1"
+  }
+}
