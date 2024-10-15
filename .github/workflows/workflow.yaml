@@ -23,7 +23,7 @@ jobs:
       - run: npm install yarn
       - run: yarn install
       - run: yarn build
-      - run: yarn test --ci --reporters=default --reporters=jest-junit
+      - run: yarn test
 
   deploy:
     needs: build
