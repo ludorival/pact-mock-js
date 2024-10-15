@@ -20,8 +20,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install yarn
-      - run: yarn install
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
       - run: yarn build
       - run: yarn test
 
@@ -41,8 +41,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install yarn
-      - run: yarn install
+      - run: npm install -g yarn
+      - run: yarn install --frozen-lockfile
       - run: yarn build
 
       - name: Git status
