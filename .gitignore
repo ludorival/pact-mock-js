@@ -7,4 +7,4 @@ node_modules/
 # Project files:
 
 pacts/*
-.yarn/install-state.gz
+.yarn/
