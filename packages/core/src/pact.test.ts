@@ -59,7 +59,92 @@ describe('PactV2', () => {
     })
 
     const pactFile = await pact.generatePactFile()
-    expect(pactFile).toMatchSnapshot()
+    expect(pactFile).toMatchInlineSnapshot(`
+    {
+      "consumer": {
+        "name": "consumer",
+      },
+      "interactions": [
+        {
+          "description": "Description with special character @/"". $",
+          "request": {
+            "body": {
+              "name": "Todo",
+            },
+            "method": "POST",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": "This is an interaction with a description",
+            "status": 200,
+          },
+        },
+        {
+          "description": "GET v1/todo returns status 200",
+          "request": {
+            "method": "GET",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": "This is an interaction without description",
+            "status": 200,
+          },
+        },
+        {
+          "description": "This is a description",
+          "request": {
+            "body": {
+              "name": "Todo",
+            },
+            "method": "POST",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": "This is an interaction with a description",
+            "status": 200,
+          },
+        },
+        {
+          "description": "This is a same description",
+          "request": {
+            "method": "GET",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": "This is an interaction with a description",
+            "status": 200,
+          },
+        },
+        {
+          "description": "This is an interaction with matching rules",
+          "request": {
+            "body": {
+              "name": "Todo",
+            },
+            "matchingRules": {
+              "$.body": {
+                "match": "type",
+              },
+            },
+            "method": "POST",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": "This is an interaction with a description",
+            "status": 200,
+          },
+        },
+      ],
+      "metadata": {
+        "pactSpecification": {
+          "version": "2.0.0",
+        },
+      },
+      "provider": {
+        "name": "provider",
+      },
+    }
+    `)
     await readFile(pact.fileName)
   })
 })
@@ -122,7 +207,92 @@ describe('PactV3', () => {
     })
 
     const pactFile = await pact.generatePactFile()
-    expect(pactFile).toMatchSnapshot()
+    expect(pactFile).toMatchInlineSnapshot(`
+    {
+      "consumer": {
+        "name": "consumer",
+      },
+      "interactions": [
+        {
+          "description": "Description with special character @/"". $",
+          "request": {
+            "body": {
+              "name": "Todo",
+            },
+            "method": "POST",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": "This is an interaction with a description",
+            "status": 200,
+          },
+        },
+        {
+          "description": "GET v1/todo returns status 200",
+          "request": {
+            "method": "GET",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": "This is an interaction without description",
+            "status": 200,
+          },
+        },
+        {
+          "description": "This is a description",
+          "request": {
+            "body": {
+              "name": "Todo",
+            },
+            "method": "POST",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": "This is an interaction with a description",
+            "status": 200,
+          },
+        },
+        {
+          "description": "This is a same description",
+          "request": {
+            "method": "GET",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": "This is an interaction with a description",
+            "status": 200,
+          },
+        },
+        {
+          "description": "This is an interaction with matching rules",
+          "request": {
+            "body": {
+              "name": "Todo",
+            },
+            "matchingRules": {
+              "body": {
+                "match": "type",
+              },
+            },
+            "method": "POST",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": "This is an interaction with a description",
+            "status": 200,
+          },
+        },
+      ],
+      "metadata": {
+        "pactSpecification": {
+          "version": "3.0.0",
+        },
+      },
+      "provider": {
+        "name": "provider",
+      },
+    }
+    `)
     await readFile(pact.fileName)
   })
 })
@@ -195,7 +365,116 @@ describe('PactV4', () => {
     })
 
     const pactFile = await pact.generatePactFile()
-    expect(pactFile).toMatchSnapshot()
+    expect(pactFile).toMatchInlineSnapshot(`
+    {
+      "consumer": {
+        "name": "consumer",
+      },
+      "interactions": [
+        {
+          "description": "Description with special character @/"". $",
+          "request": {
+            "body": {
+              "content": {
+                "name": "Todo",
+              },
+              "contentType": "application/json",
+            },
+            "method": "POST",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": {
+              "content": "This is an interaction with a description",
+              "contentType": "application/json",
+            },
+          },
+          "type": "Synchronous/HTTP",
+        },
+        {
+          "description": "GET v1/todo returns status 200",
+          "request": {
+            "method": "GET",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": {
+              "content": "This is an interaction without description",
+              "contentType": "application/json",
+            },
+            "status": 200,
+          },
+        },
+        {
+          "description": "This is a description",
+          "request": {
+            "body": {
+              "content": {
+                "name": "Todo",
+              },
+              "contentType": "application/json",
+            },
+            "method": "POST",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": {
+              "content": "This is an interaction with a description",
+              "contentType": "application/json",
+            },
+          },
+          "type": "Synchronous/HTTP",
+        },
+        {
+          "description": "This is a same description",
+          "request": {
+            "method": "GET",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": {
+              "content": "This is an interaction with a description",
+              "contentType": "application/json",
+            },
+          },
+          "type": "Synchronous/HTTP",
+        },
+        {
+          "description": "This is an interaction with matching rules",
+          "request": {
+            "body": {
+              "content": {
+                "name": "Todo",
+              },
+              "contentType": "application/json",
+            },
+            "matchingRules": {
+              "body": {
+                "match": "type",
+              },
+            },
+            "method": "POST",
+            "path": "v1/todo",
+          },
+          "response": {
+            "body": {
+              "content": "This is an interaction with a description",
+              "contentType": "application/json",
+            },
+          },
+          "type": "Synchronous/HTTP",
+        },
+      ],
+      "metadata": {
+        "pactSpecification": {
+          "version": "4.0.0",
+        },
+      },
+      "provider": {
+        "name": "provider",
+      },
+    }
+    `)
     await readFile(pact.fileName)
   })
 })
