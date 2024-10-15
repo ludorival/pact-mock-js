@@ -16,6 +16,8 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.192",
+    "axios": "^1.7.7",
+    "graphql": "^16.6.0",
     "msw": "^1.2.1"
   }
 }
