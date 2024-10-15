@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install -g yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install
       - run: yarn build
       - run: yarn test
 
@@ -42,11 +42,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install -g yarn
-      - run: yarn install --frozen-lockfile
+      - run: yarn install
       - run: yarn build
 
       - name: Git status
         run: git status
+      - run: git checkout -- package.json yarn.lock
         # Publishing to NPM
       - name: Publish with Lerna
         run: |
