@@ -50,9 +50,11 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
     {
       "description": "empty todo list",
       "request": {
+        "body": undefined,
         "headers": {},
         "method": "GET",
         "path": "/api/todos",
+        "query": undefined,
       },
       "response": {
         "body": [],
@@ -60,23 +62,13 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
       },
     },
     {
-      "description": "graphql api returns a 500 http error",
-      "providerState": "will return a 500 http error",
+      "description": "GET /api/todos returns status 200",
       "request": {
+        "body": undefined,
         "headers": {},
         "method": "GET",
         "path": "/api/todos",
-      },
-      "response": {
-        "status": 500,
-      },
-    },
-    {
-      "description": "multiple todo list",
-      "request": {
-        "headers": {},
-        "method": "GET",
-        "path": "/api/todos",
+        "query": undefined,
       },
       "response": {
         "body": [
@@ -99,12 +91,21 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
             "title": "Call plumber",
           },
         ],
-        "matchingRules": {
-          "$.body.data[*].id": {
-            "match": "type",
-          },
-        },
         "status": 200,
+      },
+    },
+    {
+      "description": "graphql api returns a 500 http error",
+      "providerState": "will return a 500 http error",
+      "request": {
+        "body": undefined,
+        "headers": {},
+        "method": "GET",
+        "path": "/api/todos",
+        "query": undefined,
+      },
+      "response": {
+        "status": 500,
       },
     },
     {
@@ -118,6 +119,7 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
         },
         "method": "POST",
         "path": "/api/todos",
+        "query": undefined,
       },
       "response": {
         "body": {
@@ -133,9 +135,11 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
       "description": "should found a todo item by its id",
       "providerState": "there is an existing todo item with this id",
       "request": {
+        "body": undefined,
         "headers": {},
         "method": "GET",
         "path": "/api/todos/1",
+        "query": undefined,
       },
       "response": {
         "body": {
@@ -150,9 +154,11 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
     {
       "description": "should not found a todo item by its id",
       "request": {
+        "body": undefined,
         "headers": {},
         "method": "GET",
         "path": "/api/todos/1",
+        "query": undefined,
       },
       "response": {
         "body": {

@@ -24,6 +24,15 @@ jobs:
       - run: yarn install
       - run: yarn build
       - run: yarn test
+      # 3. Set up npm authentication
+      - name: Configure npm authentication
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      # 4. Verify npm token
+      - name: Verify npm token validity
+        run: npm whoami
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   deploy:
     needs: build

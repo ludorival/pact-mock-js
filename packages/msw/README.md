@@ -29,6 +29,7 @@ Here is an example of how to use @pact-mock-js/msw:
 ```js
 import { setupServer, rest } from 'msw/node'
 import { Pact } from '@pact-mock-js/msw'
+import { writeFile } from 'fs'
 
 const server = setupServer()
 
@@ -38,44 +39,44 @@ const pact = new Pact({
   metadata: { pactSpecification: { version: '2.0.0' } },
 })
 
-beforeAll(async () => {
+beforeAll(() => {
   server.listen()
-  await pact.reset()
+  pact.reset()
 })
 
 afterEach(() => {
   server.resetHandlers()
 })
 
-afterAll(async () => {
+afterAll(() => {
   server.close()
-  await pact.generatePactFile()
+  // Write the pact file wherever you want
+  fs.writeFile(
+    `pacts/${pact.name}.json`,
+    JSON.stringify(pact.generatePactFile())
+  )
 })
 
 it('get all movies', async () => {
-  const mockMovies = rest.get('*/movies', async (req, res, ctx) =>
-    res(
-      ...pact.toTransformers(
+  const mockMovies = rest.get(
+    '*/movies',
+    pact.toResolver({
+      description: 'a request to list all movies',
+      response: [
         {
-          description: 'a request to list all movies',
-          response: [
-            {
-              id: 1,
-              name: 'Movie 1',
-              year: 2008,
-            },
-            {
-              id: 2,
-              name: 'Movie 2',
-              year: 2008,
-            },
-          ],
+          id: 1,
+          name: 'Movie 1',
+          year: 2008,
         },
-        req,
-        ctx
-      )
-    )
+        {
+          id: 2,
+          name: 'Movie 2',
+          year: 2008,
+        },
+      ],
+    })
   )
+
   server.use(mockMovies)
 
   const movies = await fetchMovies()

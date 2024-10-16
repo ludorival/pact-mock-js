@@ -6,5 +6,5 @@ import config from '../../jest.config.base'
 
 export default {
   ...config,
-  roots: ['<rootDir>/src/'],
+  roots: ['<rootDir>/test/'],
 }

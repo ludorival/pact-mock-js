@@ -1,17 +1,18 @@
 import {
   Pact as BasePact,
-  Interaction,
+  InteractionFor,
   MinimalInteraction,
   PactFile,
   PactV2,
   PactV3,
   PactV4,
-  ToRecordInteraction,
+  Version,
 } from '@pact-mock-js/core'
 import { omit } from 'lodash'
 import {
   GraphQLContext,
   MockedRequest,
+  ResponseResolver,
   ResponseTransformer,
   RestContext,
 } from 'msw'
@@ -21,24 +22,64 @@ import {
   HeaderType,
   HeadersConfig,
 } from 'types'
-export { PactV2, PactV3, PactV4, MinimalInteraction }
+export { MinimalInteraction, PactV2, PactV3, PactV4 }
 
 type Options = {
-  outputDir?: string
   headersConfig?: HeadersConfig
   basePath?: string
 }
 
+function buildResponse<T>(content: T, version: Version) {
+  switch (version) {
+    case '2.0.0':
+      return {
+        response: { status: 200, body: content },
+      } as MinimalInteraction<PactV2.Interaction>
+    case '3.0.0':
+      return {
+        response: { status: 200, body: content },
+      } as MinimalInteraction<PactV3.Interaction>
+
+    case '4.0.0':
+      return {
+        response: {
+          status: 200,
+          body: { content, contentType: 'application/json' },
+        },
+      } as MinimalInteraction<PactV4.Interaction>
+  }
+}
+
 type Request = PactV2.Request | PactV3.Request | PactV4.Request
-export class Pact<I extends Interaction = PactV2.Interaction> extends BasePact {
+export class Pact<P extends PactFile> extends BasePact {
   private options: Options
-  constructor(pact: Omit<PactFile<I>, 'interactions'>, options?: Options) {
-    super(pact, options?.outputDir)
-    this.options = { ...options, outputDir: 'pacts' }
+  constructor(pact: Omit<P, 'interactions'>, options?: Options) {
+    super(pact)
+    this.options = { ...options }
   }
 
+  toResolver<T extends object>(
+    input: MinimalInteraction<InteractionFor<P, T>> | T,
+    once?: boolean
+  ): ResponseResolver<
+    MockedRequest,
+    GraphQLContext<GraphQLPayload> | RestContext
+  > {
+    const version = this.version
+    return async (req, res, ctx) => {
+      const interaction =
+        'response' in input ? input : buildResponse(input, version)
+      const transformers = await this.toTransformers(
+        interaction as MinimalInteraction<InteractionFor<P, T>>,
+        req,
+        ctx
+      )
+      if (once) return res.once(...transformers)
+      else return res(...transformers)
+    }
+  }
   async toTransformers(
-    interaction: MinimalInteraction<I>,
+    interaction: MinimalInteraction<InteractionFor<P>>,
     req: MockedRequest,
     context: GraphQLContext<GraphQLPayload> | RestContext
   ): Promise<ResponseTransformer[]> {
@@ -47,10 +88,11 @@ export class Pact<I extends Interaction = PactV2.Interaction> extends BasePact {
         this.record({
           ...interaction,
           request,
-        } as ToRecordInteraction<I>)
+        })
       )
       .then()
-    const responseV4 = (interaction.response as any).body?.content
+    const responseV4 = (interaction.response as { body?: { content: unknown } })
+      .body?.content
       ? (interaction.response as PactV4.ResponseClass)
       : null
     const response = responseV4

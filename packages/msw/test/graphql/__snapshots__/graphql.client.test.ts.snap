@@ -67,6 +67,7 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
         },
         "method": "POST",
         "path": "/graphql",
+        "query": undefined,
       },
       "response": {
         "body": {
@@ -98,13 +99,14 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
         },
         "method": "POST",
         "path": "/graphql",
+        "query": undefined,
       },
       "response": {
         "status": 500,
       },
     },
     {
-      "description": "multiple todo list",
+      "description": "POST /graphql returns status 200",
       "request": {
         "body": {
           "query": "
@@ -123,6 +125,7 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
         },
         "method": "POST",
         "path": "/graphql",
+        "query": undefined,
       },
       "response": {
         "body": {
@@ -175,6 +178,7 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
         },
         "method": "POST",
         "path": "/graphql",
+        "query": undefined,
       },
       "response": {
         "body": {
@@ -214,6 +218,7 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
         },
         "method": "POST",
         "path": "/graphql",
+        "query": undefined,
       },
       "response": {
         "body": {
@@ -252,6 +257,7 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
         },
         "method": "POST",
         "path": "/graphql",
+        "query": undefined,
       },
       "response": {
         "body": {

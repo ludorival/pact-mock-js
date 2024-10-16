@@ -13,8 +13,8 @@ import {
 
 const server = setupServer()
 
-beforeAll(async () => {
-  await pact.reset()
+beforeAll(() => {
+  pact.reset()
   server.listen()
 })
 
@@ -24,7 +24,7 @@ afterEach(() => {
 
 afterAll(async () => {
   server.close()
-  const pactFile = await pact.generatePactFile()
+  const pactFile = pact.generatePactFile()
   expect(pactFile).toMatchSnapshot()
 })
 
@@ -46,7 +46,7 @@ describe('To-Do list GraphQL API client', () => {
       server.use(todosWillRaiseTechnicalFailure, emptyTodos)
 
       // call first time fetchTodos should return an error
-      expect.assertions(1)
+      expect.assertions(2)
       fetchTodos().catch((e) =>
         expect(e).toMatchObject({
           message: 'Request failed with status code 500',

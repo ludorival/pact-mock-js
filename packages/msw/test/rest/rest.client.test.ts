@@ -13,8 +13,8 @@ import { createTodo, fetchTodos, todoById } from './rest.client'
 
 const server = setupServer()
 
-beforeAll(async () => {
-  await pact.reset()
+beforeAll(() => {
+  pact.reset()
   server.listen()
 })
 
@@ -22,9 +22,9 @@ afterEach(() => {
   server.resetHandlers()
 })
 
-afterAll(async () => {
+afterAll(() => {
   server.close()
-  const pactFile = await pact.generatePactFile()
+  const pactFile = pact.generatePactFile()
   expect(pactFile).toMatchSnapshot()
 })
 

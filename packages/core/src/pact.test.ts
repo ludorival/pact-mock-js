@@ -1,21 +1,17 @@
 import { PactV2, PactV3, PactV4 } from 'types'
 import { Pact } from './pact'
-import { readFile } from 'fs/promises'
 describe('PactV2', () => {
-  const pact = new Pact(
-    {
-      consumer: { name: 'consumer' },
-      provider: { name: 'provider' },
-      metadata: { pactSpecification: { version: '2.0.0' } },
-    },
-    'pacts/v2'
-  )
-
-  afterEach(async () => {
-    await pact.reset()
+  const pact = new Pact<PactV2.PactFile>({
+    consumer: { name: 'consumer' },
+    provider: { name: 'provider' },
+    metadata: { pactSpecification: { version: '2.0.0' } },
   })
 
-  it('should record a Pact V2 Interactions ', async () => {
+  afterEach(() => {
+    pact.reset()
+  })
+
+  it('should record a Pact V2 Interactions ', () => {
     // given
 
     const anInteraction = {
@@ -28,28 +24,28 @@ describe('PactV2', () => {
     } as PactV2.Interaction
 
     // when
-    await pact.record<string>({
+    pact.record({
       request: { method: 'GET', path: 'v1/todo' },
       response: {
         status: 200,
         body: 'This is an interaction without description',
       },
     })
-    await pact.record(anInteraction)
-    await pact.record({
+    pact.record(anInteraction)
+    pact.record({
       ...anInteraction,
       description: 'This is a same description',
     })
-    await pact.record({
+    pact.record({
       ...anInteraction,
       description: 'This is a same description',
       request: { method: 'GET', path: 'v1/todo' },
     })
-    await pact.record({
+    pact.record({
       ...anInteraction,
       description: 'Description with special character @/"". $',
     })
-    await pact.record({
+    pact.record({
       ...anInteraction,
       description: 'This is an interaction with matching rules',
       request: {
@@ -58,7 +54,7 @@ describe('PactV2', () => {
       },
     })
 
-    const pactFile = await pact.generatePactFile()
+    const pactFile = pact.generatePactFile()
     expect(pactFile).toMatchInlineSnapshot(`
     {
       "consumer": {
@@ -145,25 +141,21 @@ describe('PactV2', () => {
       },
     }
     `)
-    await readFile(pact.fileName)
   })
 })
 
 describe('PactV3', () => {
-  const pact = new Pact<PactV3.Interaction>(
-    {
-      consumer: { name: 'consumer' },
-      provider: { name: 'provider' },
-      metadata: { pactSpecification: { version: '3.0.0' } },
-    },
-    'pacts/v3'
-  )
-
-  afterEach(async () => {
-    await pact.reset()
+  const pact = new Pact<PactV3.PactFile>({
+    consumer: { name: 'consumer' },
+    provider: { name: 'provider' },
+    metadata: { pactSpecification: { version: '3.0.0' } },
   })
 
-  it('should record a Pact V3 Interactions ', async () => {
+  afterEach(() => {
+    pact.reset()
+  })
+
+  it('should record a Pact V3 Interactions ', () => {
     // given
 
     const anInteraction = {
@@ -176,28 +168,28 @@ describe('PactV3', () => {
     } as PactV3.Interaction
 
     // when
-    await pact.record<string>({
+    pact.record({
       request: { method: 'GET', path: 'v1/todo' },
       response: {
         status: 200,
         body: 'This is an interaction without description',
       },
     })
-    await pact.record(anInteraction)
-    await pact.record({
+    pact.record(anInteraction)
+    pact.record({
       ...anInteraction,
       description: 'This is a same description',
     })
-    await pact.record({
+    pact.record({
       ...anInteraction,
       description: 'This is a same description',
       request: { method: 'GET', path: 'v1/todo' },
     })
-    await pact.record({
+    pact.record({
       ...anInteraction,
       description: 'Description with special character @/"". $',
     })
-    await pact.record({
+    pact.record({
       ...anInteraction,
       description: 'This is an interaction with matching rules',
       request: {
@@ -206,7 +198,7 @@ describe('PactV3', () => {
       },
     })
 
-    const pactFile = await pact.generatePactFile()
+    const pactFile = pact.generatePactFile()
     expect(pactFile).toMatchInlineSnapshot(`
     {
       "consumer": {
@@ -293,25 +285,21 @@ describe('PactV3', () => {
       },
     }
     `)
-    await readFile(pact.fileName)
   })
 })
 
 describe('PactV4', () => {
-  const pact = new Pact<PactV4.Interaction>(
-    {
-      consumer: { name: 'consumer' },
-      provider: { name: 'provider' },
-      metadata: { pactSpecification: { version: '4.0.0' } },
-    },
-    'pacts/v4'
-  )
-
-  afterEach(async () => {
-    await pact.reset()
+  const pact = new Pact<PactV4.PactFile>({
+    consumer: { name: 'consumer' },
+    provider: { name: 'provider' },
+    metadata: { pactSpecification: { version: '4.0.0' } },
   })
 
-  it('should record a Pact V4 Interactions ', async () => {
+  afterEach(() => {
+    pact.reset()
+  })
+
+  it('should record a Pact V4 Interactions ', () => {
     // given
 
     const anInteraction = {
@@ -331,7 +319,7 @@ describe('PactV4', () => {
     } as PactV4.Interaction
 
     // when
-    await pact.record<string>({
+    pact.record({
       request: { method: 'GET', path: 'v1/todo' },
       response: {
         status: 200,
@@ -341,21 +329,21 @@ describe('PactV4', () => {
         },
       },
     })
-    await pact.record(anInteraction)
-    await pact.record({
+    pact.record(anInteraction)
+    pact.record({
       ...anInteraction,
       description: 'This is a same description',
     })
-    await pact.record({
+    pact.record({
       ...anInteraction,
       description: 'This is a same description',
       request: { method: 'GET', path: 'v1/todo' },
     })
-    await pact.record({
+    pact.record({
       ...anInteraction,
       description: 'Description with special character @/"". $',
     })
-    await pact.record({
+    pact.record({
       ...anInteraction,
       description: 'This is an interaction with matching rules',
       request: {
@@ -364,7 +352,7 @@ describe('PactV4', () => {
       },
     })
 
-    const pactFile = await pact.generatePactFile()
+    const pactFile = pact.generatePactFile()
     expect(pactFile).toMatchInlineSnapshot(`
     {
       "consumer": {
@@ -475,6 +463,5 @@ describe('PactV4', () => {
       },
     }
     `)
-    await readFile(pact.fileName)
   })
 })
