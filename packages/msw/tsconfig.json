@@ -5,7 +5,7 @@
     "rootDir": "src",
     "baseUrl": "src",
     "paths": {
-      "@pact-mock-js/msw": ["index.ts"]
+      "pact-mock-js.msw": ["index.ts"]
     },
     /* List of root folders whose combined content represents the structure of the project at runtime. */
     "types": ["node", "jest"]

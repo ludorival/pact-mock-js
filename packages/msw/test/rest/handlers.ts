@@ -1,4 +1,4 @@
-import { Pact } from '@pact-mock-js/msw'
+import { Pact } from 'pact-mock-js.msw'
 import { rest } from 'msw'
 
 export const pact = new Pact(

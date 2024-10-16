@@ -1,5 +1,5 @@
 {
-  "name": "@pact-mock-js/msw",
+  "name": "pact-mock-js.msw",
   "version": "0.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,13 +11,16 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@pact-mock-js/core": "0.0.1",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "pact-mock-js.core": "0.0.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.192",
     "axios": "^1.7.7",
     "graphql": "^16.6.0",
     "msw": "^1.2.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

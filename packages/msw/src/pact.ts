@@ -7,7 +7,7 @@ import {
   PactV3,
   PactV4,
   Version,
-} from '@pact-mock-js/core'
+} from 'pact-mock-js.core'
 import { omit } from 'lodash'
 import {
   GraphQLContext,

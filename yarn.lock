@@ -1510,25 +1510,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pact-mock-js/core@npm:0.0.1, @pact-mock-js/core@workspace:packages/core":
-  version: 0.0.0-use.local
-  resolution: "@pact-mock-js/core@workspace:packages/core"
-  languageName: unknown
-  linkType: soft
-
-"@pact-mock-js/msw@workspace:packages/msw":
-  version: 0.0.0-use.local
-  resolution: "@pact-mock-js/msw@workspace:packages/msw"
-  dependencies:
-    "@pact-mock-js/core": "npm:0.0.1"
-    "@types/lodash": "npm:^4.14.192"
-    axios: "npm:^1.7.7"
-    graphql: "npm:^16.6.0"
-    lodash: "npm:^4.17.21"
-    msw: "npm:^1.2.1"
-  languageName: unknown
-  linkType: soft
-
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -7052,6 +7033,25 @@ __metadata:
   checksum: 10c0/d80907375dd52a521255e0debca1ba9089ad8fd7acdf16c5a5db2ea2a5bb23045e2bcf08d1648b1ebc40fcc889657db86ff6187ff5f8d2fc312cd6ad1ec4c6ac
   languageName: node
   linkType: hard
+
+"pact-mock-js.core@npm:0.0.1, pact-mock-js.core@workspace:packages/core":
+  version: 0.0.0-use.local
+  resolution: "pact-mock-js.core@workspace:packages/core"
+  languageName: unknown
+  linkType: soft
+
+"pact-mock-js.msw@workspace:packages/msw":
+  version: 0.0.0-use.local
+  resolution: "pact-mock-js.msw@workspace:packages/msw"
+  dependencies:
+    "@types/lodash": "npm:^4.14.192"
+    axios: "npm:^1.7.7"
+    graphql: "npm:^16.6.0"
+    lodash: "npm:^4.17.21"
+    msw: "npm:^1.2.1"
+    pact-mock-js.core: "npm:0.0.1"
+  languageName: unknown
+  linkType: soft
 
 "pact-mock-js@workspace:.":
   version: 0.0.0-use.local

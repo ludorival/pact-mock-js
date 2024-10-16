@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to @pact-mock-js/msw 👋</h1>
+<h1 align="center">Welcome to pact-mock-js.msw 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/github/v/release/ludorival/pact-mock-js/msw" />
   <a href="https://github.com/ludorival/pact-mock-js/msw#readme" target="_blank">
@@ -12,23 +12,23 @@
   </a>
 </p>
 
-# @pact-mock-js/msw
+# pact-mock-js.msw
 
-`@pact-mock-js/msw` is a Node.js library that allows you to build [Pact](https://docs.pact.io/) contracts by leveraging your existings [msw](https://mswjs.io/) mocks. This library provides an easy way to generate contracts that can be used for testing and verifying API interactions between consumer and provider.
+`pact-mock-js.msw` is a Node.js library that allows you to build [Pact](https://docs.pact.io/) contracts by leveraging your existings [msw](https://mswjs.io/) mocks. This library provides an easy way to generate contracts that can be used for testing and verifying API interactions between consumer and provider.
 
-## Install @pact-mock-js/msw
+## Install pact-mock-js.msw
 
 ```sh
-yarn add -D @pact-mock-js/msw
+yarn add -D pact-mock-js.msw
 ```
 
 ## Usage
 
-Here is an example of how to use @pact-mock-js/msw:
+Here is an example of how to use pact-mock-js.msw:
 
 ```js
 import { setupServer, rest } from 'msw/node'
-import { Pact } from '@pact-mock-js/msw'
+import { Pact } from 'pact-mock-js.msw'
 import { writeFile } from 'fs'
 
 const server = setupServer()

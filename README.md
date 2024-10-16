@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to @pact-mock-js/msw 👋</h1>
+<h1 align="center">Welcome to pact-mock-js.msw 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/github/v/release/ludorival/pact-mock-js/msw" />
   <a href="https://github.com/ludorival/pact-mock-js/msw#readme" target="_blank">
@@ -18,7 +18,7 @@
 
 ## Getting started with MSW
 
-Read the documentation in [@pact-mock-js/msw](./packages/msw/README.md)
+Read the documentation in [pact-mock-js.msw](./packages/msw/README.md)
 
 ## Author
 
