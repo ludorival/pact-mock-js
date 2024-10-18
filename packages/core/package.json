@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc --build --verbose",
     "test": "jest src/pact.test.ts "
   },
   "keywords": [],

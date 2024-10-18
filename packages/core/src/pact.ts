@@ -5,14 +5,14 @@ import {
   PactV2,
   ToRecordInteraction,
   Version,
-} from 'types'
+} from './types'
 
 function pactName<P extends PactFile>(pact: InputPact<P>) {
   return `${pact.consumer.name}-${pact.provider.name}`
 }
-export class Pact<T extends PactFile = PactV2.PactFile> {
-  private interactions: Record<string, InteractionFor<T>> = {}
-  constructor(private pact: InputPact<T>) {
+export class Pact<P extends PactFile = PactV2.PactFile> {
+  private interactions: Record<string, InteractionFor<P>> = {}
+  constructor(private pact: InputPact<P>) {
     if (!pact.metadata?.pactSpecification?.version)
       throw new Error(`The version is missing in the Pact. Please provide the right version like
     { consumer: { name : 'my-consumer'}, provider : { name: 'my-provider'},
@@ -27,7 +27,7 @@ export class Pact<T extends PactFile = PactV2.PactFile> {
   }
 
   record<TResponse = unknown, TRequest = unknown>(
-    input: ToRecordInteraction<InteractionFor<T, TResponse, TRequest>>
+    input: ToRecordInteraction<InteractionFor<P, TResponse, TRequest>>
   ) {
     const response = input.response as { status?: number }
     const description =
@@ -37,7 +37,7 @@ export class Pact<T extends PactFile = PactV2.PactFile> {
       }`
 
     const interaction = { description, ...input } as InteractionFor<
-      T,
+      P,
       TResponse,
       TRequest
     >
@@ -53,11 +53,11 @@ export class Pact<T extends PactFile = PactV2.PactFile> {
     this.interactions[description] = interaction
   }
 
-  generatePactFile(): T {
+  generatePactFile(): P {
     const interactions = Object.keys(this.interactions)
       .map((d) => this.interactions[d])
       .sort((a, b) => a.description.localeCompare(b.description))
-    const pactFile = { ...(this.pact as T), interactions }
+    const pactFile = { ...(this.pact as P), interactions }
     return pactFile
   }
 

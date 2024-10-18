@@ -1,11 +1,13 @@
 import {
   Pact as BasePact,
+  InputPact,
   InteractionFor,
   MinimalInteraction,
   PactFile,
   PactV2,
   PactV3,
   PactV4,
+  ToRecordInteraction,
   Version,
 } from 'pact-mock-js.core'
 import { omit } from 'lodash'
@@ -21,7 +23,7 @@ import {
   GraphQLResponse,
   HeaderType,
   HeadersConfig,
-} from 'types'
+} from './types'
 export { MinimalInteraction, PactV2, PactV3, PactV4 }
 
 type Options = {
@@ -53,8 +55,8 @@ function buildResponse<T>(content: T, version: Version) {
 type Request = PactV2.Request | PactV3.Request | PactV4.Request
 export class Pact<P extends PactFile> extends BasePact {
   private options: Options
-  constructor(pact: Omit<P, 'interactions'>, options?: Options) {
-    super(pact)
+  constructor(pact: InputPact<P>, options?: Options) {
+    super(pact as any)
     this.options = { ...options }
   }
 
@@ -88,7 +90,7 @@ export class Pact<P extends PactFile> extends BasePact {
         this.record({
           ...interaction,
           request,
-        })
+        } as any)
       )
       .then()
     const responseV4 = (interaction.response as { body?: { content: unknown } })

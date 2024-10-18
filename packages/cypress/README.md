@@ -12,14 +12,14 @@
   </a>
 </p>
 
-# pact-mock-js.msw
+# pact-mock-js.cypress
 
-`pact-mock-js.msw` is a Node.js library that allows you to build [Pact](https://docs.pact.io/) contracts by leveraging your existings [msw](https://mswjs.io/) mocks. This library provides an easy way to generate contracts that can be used for testing and verifying API interactions between consumer and provider.
+`pact-mock-js.cypress` is a Node.js library that allows you to build [Pact](https://docs.pact.io/) contracts by leveraging your existings [Cypress](https://www.cypress.io/) mocks. This library provides an easy way to generate contracts that can be used for testing and verifying API interactions between consumer and provider.
 
-## Install pact-mock-js.msw
+## Install pact-mock-js.cypress
 
 ```sh
-yarn add -D pact-mock-js.msw
+yarn add -D pact-mock-js.cypress
 ```
 
 ## Usage
@@ -27,9 +27,7 @@ yarn add -D pact-mock-js.msw
 Here is an example of how to use pact-mock-js.msw:
 
 ```js
-import { setupServer, rest } from 'msw/node'
-import { Pact } from 'pact-mock-js.msw'
-import { writeFile } from 'fs'
+import { Pact } from 'pact-mock-js.cypress'
 
 const server = setupServer()
 
@@ -40,21 +38,14 @@ const pact = new Pact({
 })
 
 beforeAll(() => {
-  server.listen()
   pact.reset()
 })
 
-afterEach(() => {
-  server.resetHandlers()
-})
-
 afterAll(() => {
-  server.close()
   // Write the pact file wherever you want
-  fs.writeFile(
-    `pacts/${pact.name}.json`,
-    JSON.stringify(pact.generatePactFile())
-  )
+  cy.writeFile(`pacts/${pact.name}.json`, pact.generatePactFile()).then(() => {
+    cy.log('Les résultats des tests ont été écrits dans test-results.json')
+  })
 })
 
 it('get all movies', async () => {

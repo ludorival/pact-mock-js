@@ -1,14 +1,14 @@
 <h1 align="center">Welcome to pact-mock-js.msw 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/github/v/release/ludorival/pact-mock-js/msw" />
-  <a href="https://github.com/ludorival/pact-mock-js/msw#readme" target="_blank">
+  <img alt="Version" src="https://img.shields.io/github/v/release/ludorival/pact-mock-js" />
+  <a href="https://github.com/ludorival/pact-mock-js#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
-  <a href="https://github.com/ludorival/pact-mock-js/msw/graphs/commit-activity" target="_blank">
+  <a href="https://github.com/ludorival/pact-mock-js/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a href="https://github.com/ludorival/pact-mock-js/msw/blob/master/LICENSE" target="_blank">
-    <img alt="License: BSD--3--Clause" src="https://img.shields.io/github/license/ludorival/pact-mock-js/msw" />
+  <a href="https://github.com/ludorival/pact-mock-js/blob/master/LICENSE" target="_blank">
+    <img alt="License: BSD--3--Clause" src="https://img.shields.io/github/license/ludorival/pact-mock-js" />
   </a>
 </p>
 
@@ -33,7 +33,7 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2021 [Ludovic Dorival](https://github.com/ludorival).<br />
-This project is [BSD--3--Clause](https://github.com/ludorival/pact-mock-js/msw/blob/master/LICENSE) licensed.
+This project is [BSD--3--Clause](https://github.com/ludorival/pact-mock-js/blob/master/LICENSE) licensed.
 
 ---
 

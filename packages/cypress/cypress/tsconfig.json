@@ -1,0 +1,17 @@
+{
+  "extends": "../../../tsconfig.json",
+  
+  "compilerOptions": {
+      "target": "es5",
+      "lib": ["es5", "dom"],
+      "types": ["cypress", "node"],
+      "outDir": "dist",
+      "rootDirs": [".", "../src", "../../packages/core"],
+      "baseUrl": ".",
+      "paths": {
+        "pact-mock-js.cypress": ["../src/index.ts"],
+        "pact-mock-js.core": ["../../packages/core/src/index.ts"],
+      }
+    },
+    "include": ["**/*.ts"]
+  }
