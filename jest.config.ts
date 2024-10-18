@@ -18,6 +18,7 @@ const config: Config = {
       statements: -10,
     },
   },
+  coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
   testEnvironment: 'node',
   reporters: [['github-actions', { silent: false }], 'summary'],
 }
