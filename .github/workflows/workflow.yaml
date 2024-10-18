@@ -13,26 +13,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [16.x]
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install -g yarn
+      - run: npm install yarn -g
       - run: yarn install
-      - run: yarn build
       - run: yarn test
-      # 3. Set up npm authentication
-      - name: Configure npm authentication
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
-      # 4. Verify npm token
-      - name: Verify npm token validity
-        run: npm whoami
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   deploy:
     needs: build
@@ -40,30 +30,26 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [16.x]
     permissions:
       contents: read
       packages: write
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install -g yarn
+      - run: npm install yarn
       - run: yarn install
       - run: yarn build
 
       - name: Git status
         run: git status
-      - run: git checkout -- package.json yarn.lock
         # Publishing to NPM
-      - name: Publish with Lerna
-        run: |
-          # Authentification with NPM
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
-          npx lerna publish from-package --yes
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
 
   create-release:
     needs: deploy

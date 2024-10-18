@@ -9,3 +9,4 @@ node_modules/
 pacts/*
 .yarn/
 .yarn/install-state.gz
+tsconfig.tsbuildinfo
