@@ -23,7 +23,6 @@ import {
   HeaderType,
   HeadersConfig,
 } from './types'
-export { MinimalInteraction, PactV2, PactV3, PactV4 }
 
 type Options = {
   headersConfig?: HeadersConfig

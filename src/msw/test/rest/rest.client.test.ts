@@ -9,7 +9,7 @@ import {
   todoByIdNotFound,
   todosWillRaiseTechnicalFailure,
 } from './handlers'
-import { createTodo, fetchTodos, todoById } from './rest.client'
+import { createTodo, fetchTodos, todoById } from '../../../test/rest.client'
 
 const server = setupServer()
 

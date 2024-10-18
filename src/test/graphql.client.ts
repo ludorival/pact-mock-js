@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { GraphQLError } from 'graphql'
-import { Todo } from '../Todo'
+import { Todo } from './Todo'
 
-const url = 'https://pact.msw.example.com/graphql'
+const url = 'https://pact-mock-js.example.com/graphql'
 
 async function graphql<TData, TVariables = unknown>({
   query,

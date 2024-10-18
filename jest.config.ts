@@ -21,5 +21,10 @@ const config: Config = {
   coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
   testEnvironment: 'node',
   reporters: [['github-actions', { silent: false }], 'summary'],
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.jest.json',
+    },
+  },
 }
 export default config

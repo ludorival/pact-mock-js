@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { setupServer } from 'msw/node'
-import { createTodo, fetchTodos, todoById } from './graphql.client'
+import { createTodo, fetchTodos, todoById } from '../../../test/graphql.client'
 import {
   createTodoWillSucceed,
   emptyTodos,
