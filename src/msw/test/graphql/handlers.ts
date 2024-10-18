@@ -1,4 +1,4 @@
-import { Pact } from 'pact-mock-js.msw'
+import { Pact } from '../../pact'
 import { GraphQLError } from 'graphql'
 import { graphql } from 'msw'
 

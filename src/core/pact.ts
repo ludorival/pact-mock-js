@@ -5,7 +5,7 @@ import {
   PactV2,
   ToRecordInteraction,
   Version,
-} from 'types'
+} from '../types'
 
 function pactName<P extends PactFile>(pact: InputPact<P>) {
   return `${pact.consumer.name}-${pact.provider.name}`

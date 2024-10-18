@@ -1,4 +1,4 @@
-import { PactV2, PactV3, PactV4 } from 'types'
+import { PactV2, PactV3, PactV4 } from '../types'
 import { Pact } from './pact'
 describe('PactV2', () => {
   const pact = new Pact<PactV2.PactFile>({

@@ -2303,7 +2303,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^1.7.4, axios@npm:^1.7.7":
+"axios@npm:^1.7.4":
   version: 1.7.7
   resolution: "axios@npm:1.7.7"
   dependencies:
@@ -4383,7 +4383,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:^16.6.0, graphql@npm:^16.8.1":
+"graphql@npm:^16.8.1":
   version: 16.9.0
   resolution: "graphql@npm:16.9.0"
   checksum: 10c0/a8850f077ff767377237d1f8b1da2ec70aeb7623cdf1dfc9e1c7ae93accc0c8149c85abe68923be9871a2934b1bce5a2496f846d4d56e1cfb03eaaa7ddba9b6a
@@ -7034,25 +7034,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pact-mock-js.core@npm:0.0.1, pact-mock-js.core@workspace:packages/core":
-  version: 0.0.0-use.local
-  resolution: "pact-mock-js.core@workspace:packages/core"
-  languageName: unknown
-  linkType: soft
-
-"pact-mock-js.msw@workspace:packages/msw":
-  version: 0.0.0-use.local
-  resolution: "pact-mock-js.msw@workspace:packages/msw"
-  dependencies:
-    "@types/lodash": "npm:^4.14.192"
-    axios: "npm:^1.7.7"
-    graphql: "npm:^16.6.0"
-    lodash: "npm:^4.17.21"
-    msw: "npm:^1.2.1"
-    pact-mock-js.core: "npm:0.0.1"
-  languageName: unknown
-  linkType: soft
-
 "pact-mock-js@workspace:.":
   version: 0.0.0-use.local
   resolution: "pact-mock-js@workspace:."
@@ -7067,6 +7048,8 @@ __metadata:
     eslint-plugin-prettier: "npm:4.2.1"
     jest: "npm:29.7.0"
     lerna: "npm:^8.1.8"
+    lodash: "npm:^4.17.21"
+    msw: "npm:^1.2.1"
     prettier: "npm:2.8.8"
     ts-jest: "npm:^29.2.5"
     ts-node: "npm:10.9.2"
