@@ -1,5 +1,5 @@
 import axios, { Method } from 'axios'
-import { CreateTodoApi, FetchTodosApi, Todo, TodoByIdApi } from './Todo'
+import { CreateTodoApi, FetchTodosApi, TodoByIdApi } from './Todo'
 
 const url = 'https://pact-mock-js.example.com/api'
 

@@ -3,7 +3,7 @@ import type {
   RouteHandlerController,
   StaticResponse,
 } from 'cypress/types/net-stubbing'
-import { omit } from 'lodash'
+import { Pact as BasePact, buildResponse } from '../core'
 import {
   InputPact,
   InteractionFor,
@@ -12,43 +12,19 @@ import {
   PactV2,
   PactV3,
   PactV4,
-  Version,
+  ToRecordInteraction,
 } from '../types'
-import { Pact as BasePact } from '../core'
-import { HeaderType, HeadersConfig } from './types'
+import { HeadersConfig } from './types'
 
 type Options = {
   headersConfig?: HeadersConfig
   basePath?: string
 }
 
-function buildResponse<T>(content: T, version: Version) {
-  switch (version) {
-    case '2.0.0':
-      return {
-        response: { status: 200, body: content },
-      } as MinimalInteraction<PactV2.Interaction>
-    case '3.0.0':
-      return {
-        response: { status: 200, body: content },
-      } as MinimalInteraction<PactV3.Interaction>
-
-    case '4.0.0':
-      return {
-        response: {
-          status: 200,
-          body: { content, contentType: 'application/json' },
-        },
-      } as MinimalInteraction<PactV4.Interaction>
-  }
-}
-
 type Request = PactV2.Request | PactV3.Request | PactV4.Request
 export class Pact<P extends PactFile> extends BasePact<P> {
-  private options: Options
   constructor(pact: InputPact<P>, options?: Options) {
-    super(pact)
-    this.options = { ...options }
+    super(pact, options)
   }
 
   toHandler<T extends object>(
@@ -70,8 +46,10 @@ export class Pact<P extends PactFile> extends BasePact<P> {
     interaction: MinimalInteraction<InteractionFor<P>>,
     req: CyHttpMessages.IncomingHttpRequest
   ): StaticResponse {
-    const request = toRequest(req, this.options)
-    this.record({ ...interaction, request })
+    const request = toRequest(req)
+    this.record({ ...interaction, request } as ToRecordInteraction<
+      InteractionFor<P>
+    >)
     const responseV4 = (interaction.response as { body?: { content: unknown } })
       .body?.content
       ? (interaction.response as PactV4.ResponseClass)
@@ -88,32 +66,17 @@ export class Pact<P extends PactFile> extends BasePact<P> {
   }
 }
 
-function toRequest(
-  req: CyHttpMessages.IncomingHttpRequest,
-  { headersConfig, basePath }: Options
-): Request {
+function toRequest(req: CyHttpMessages.IncomingHttpRequest): Request {
   const parts = req.url.split('?')
-  const path = parts[0].replace(basePath || '', '')
+  const path = parts[0]
   const query = parts.slice(1).join('?')
   const body: Body = req.body
 
   return {
     method: req.method,
     path,
-    headers: omitHeaders(req.headers, headersConfig),
+    headers: req.headers,
     body,
     query,
   } as Request
-}
-
-const omitHeaders = (
-  headers: HeaderType,
-  headersConfig: HeadersConfig = {}
-) => {
-  const blocklist = headersConfig.excludes || []
-  if (headersConfig.includes) {
-    const remove = Object.keys(omit(headers, ...headersConfig.includes))
-    blocklist.push(...remove)
-  }
-  return omit(headers, [...blocklist])
 }

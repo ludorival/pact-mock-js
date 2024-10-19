@@ -6,9 +6,3 @@ export type GraphQLResponse<T = any> = {
   data?: T
   errors?: GraphQLError[]
 }
-
-export type HeadersConfig = {
-  includes?: string[]
-  excludes?: string[]
-}
-export type HeaderType = Record<string, string | string[]> | undefined

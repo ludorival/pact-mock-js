@@ -10,6 +10,7 @@ import {
   todosWillRaiseTechnicalFailure,
 } from './handlers'
 import { createTodo, fetchTodos, todoById } from '../../../test/rest.client'
+import { omitVersion } from '../../../test/utils'
 
 const server = setupServer()
 
@@ -25,7 +26,7 @@ afterEach(() => {
 afterAll(() => {
   server.close()
   const pactFile = pact.generatePactFile()
-  expect(pactFile).toMatchSnapshot()
+  expect(omitVersion(pactFile)).toMatchSnapshot()
 })
 
 describe('To-Do list GraphQL API client', () => {

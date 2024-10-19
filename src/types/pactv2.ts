@@ -60,6 +60,10 @@ export type Metadata = {
   'pact-specification'?: PactSpecification
   pactSpecification?: PactSpecification
   pactSpecificationVersion?: '2.0.0'
+  client?: {
+    name: 'pact-mock-js'
+    version: string
+  }
   [property: string]: any
 }
 

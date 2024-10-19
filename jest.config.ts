@@ -7,7 +7,7 @@ const config: Config = {
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
   transform: {
-    '\\.(ts)$': 'ts-jest',
+    '\\.(ts)$': ['ts-jest', { tsconfig: 'tsconfig.jest.json' }],
   },
   coverageDirectory: 'coverage',
   coverageThreshold: {
@@ -21,10 +21,5 @@ const config: Config = {
   coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
   testEnvironment: 'node',
   reporters: [['github-actions', { silent: false }], 'summary'],
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.jest.json',
-    },
-  },
 }
 export default config

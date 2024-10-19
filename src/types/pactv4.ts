@@ -234,6 +234,10 @@ export type InteractionType =
 
 export type Metadata = {
   pactSpecification?: PactSpecification
+  client?: {
+    name: 'pact-mock-js'
+    version: string
+  }
   [property: string]: any
 }
 

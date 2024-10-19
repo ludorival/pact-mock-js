@@ -28,7 +28,7 @@ Here is an example of how to use pact-mock-js with [MSW](https://mswjs.io/):
 
 ```js
 import { setupServer, rest } from 'msw/node'
-import { Pact } from 'pact-mock-js.msw'
+import { Pact } from 'pact-mock-js/msw'
 import { writeFile } from 'fs'
 
 const server = setupServer()
@@ -116,11 +116,11 @@ const pact = new Pact({
   metadata: { pactSpecification: { version: '2.0.0' } },
 })
 
-beforeAll(() => {
+before(() => {
   pact.reset()
 })
 
-afterAll(() => {
+after(() => {
   // Write the pact file wherever you want
   cy.writeFile(`pacts/${pact.name}.json`, pact.generatePactFile())
 })

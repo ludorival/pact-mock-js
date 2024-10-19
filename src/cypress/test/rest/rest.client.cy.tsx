@@ -13,6 +13,7 @@ import {
   todoByIdNotFound,
   todosWillRaiseTechnicalFailure,
 } from './handlers'
+import { omitVersion } from '../../../test/utils'
 
 before(() => {
   pact.reset()
@@ -22,7 +23,7 @@ after(() => {
   const pactFile = pact.generatePactFile()
   cy.writeFile(`pacts/${pact.name}.json`, pactFile)
   cy.fixture('test-consumer-rest-provider.json').then((expectedPact) => {
-    expect(pactFile).to.deep.equal(expectedPact)
+    expect(omitVersion(pactFile)).to.deep.equal(omitVersion(expectedPact))
   })
 })
 
