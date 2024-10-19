@@ -12,7 +12,7 @@ export const pact = new Pact(
     headersConfig: {
       includes: ['content-type'],
     },
-  }
+  },
 )
 export const todosWillRaiseTechnicalFailure = http.get(
   '*/todos',
@@ -22,7 +22,7 @@ export const todosWillRaiseTechnicalFailure = http.get(
     response: {
       status: 500,
     },
-  })
+  }),
 )
 export const emptyTodos = http.get(
   '*/todos',
@@ -32,7 +32,7 @@ export const emptyTodos = http.get(
       status: 200,
       body: [],
     },
-  })
+  }),
 )
 // I can pass directly the body here, the status and description will be resolved automatically
 export const multipleTodos = http.get(
@@ -56,7 +56,7 @@ export const multipleTodos = http.get(
       description: 'Fix leaky faucet in the bathroom',
       completed: false,
     },
-  ])
+  ]),
 )
 
 export const todoByIdFound = http.get(
@@ -73,7 +73,7 @@ export const todoByIdFound = http.get(
         completed: false,
       },
     },
-  })
+  }),
 )
 
 export const todoByIdNotFound = http.get(
@@ -84,7 +84,7 @@ export const todoByIdNotFound = http.get(
       status: 404,
       body: { message: 'The todo item 1 is not found' },
     },
-  })
+  }),
 )
 // I can use the transformers, if I want to add my own transform
 export const createTodoWillSucceed = http.post(
@@ -103,6 +103,6 @@ export const createTodoWillSucceed = http.post(
           },
         },
       },
-      info
-    )
+      info,
+    ),
 )

@@ -14,7 +14,7 @@ describe('PactV2', () => {
         excludes: ['Authorization'],
       },
       basePath: 'base',
-    }
+    },
   )
 
   afterEach(() => {

@@ -1,9 +1,8 @@
+import { omit } from 'lodash'
 import {
   DefaultBodyType,
-  GraphQLResponseResolver,
   HttpResponse,
   HttpResponseInit,
-  ResponseResolver,
   StrictRequest,
   StrictResponse,
 } from 'msw'
@@ -20,10 +19,9 @@ import {
   Request,
   ToRecordInteraction,
 } from '../types'
-import { omit, omitBy } from 'lodash'
 type Info<
   R extends DefaultBodyType = DefaultBodyType,
-  Extra extends Record<string, unknown> = Record<string, unknown>
+  Extra extends Record<string, unknown> = Record<string, unknown>,
 > = {
   request: StrictRequest<R>
 } & Extra
@@ -33,7 +31,7 @@ export class Pact<P extends PactFile> extends BasePact<P> {
   }
 
   toResolver<T extends object, R extends DefaultBodyType = DefaultBodyType>(
-    input: MinimalInteraction<InteractionFor<P, T>> | T
+    input: MinimalInteraction<InteractionFor<P, T>> | T,
   ): (info: Info<R>) => Promise<StrictResponse<T>> {
     const version = this.version
     return async (info) => {
@@ -41,7 +39,7 @@ export class Pact<P extends PactFile> extends BasePact<P> {
         'response' in input ? input : buildResponse(input, version)
       const response = await this.toResponse(
         interaction as MinimalInteraction<InteractionFor<P, T>>,
-        info
+        info,
       )
       return response
     }
@@ -49,11 +47,11 @@ export class Pact<P extends PactFile> extends BasePact<P> {
 
   async toResponse<
     TResponse extends DefaultBodyType,
-    TRequest extends DefaultBodyType = DefaultBodyType
+    TRequest extends DefaultBodyType = DefaultBodyType,
   >(
     interaction: MinimalInteraction<InteractionFor<P, TResponse>>,
     info: Info<TRequest>,
-    initOptions?: HttpResponseInit
+    initOptions?: HttpResponseInit,
   ): Promise<StrictResponse<TResponse>> {
     const toRecord = {
       ...interaction,
@@ -81,15 +79,15 @@ export class Pact<P extends PactFile> extends BasePact<P> {
 }
 
 async function toRequest<R extends DefaultBodyType = DefaultBodyType>(
-  info: Info<R>
+  info: Info<R>,
 ): Promise<Request> {
   const url = new URL(info.request.url)
   const path = url.pathname
   const query = url.searchParams.toString() || undefined
   const body = info.query
     ? omit(info, 'request', 'requestId')
-    : await info.request.json().catch((e) => info.request.body)
-  const headers: Record<string, any> = {}
+    : await info.request.json().catch(() => info.request.body)
+  const headers: Record<string, unknown> = {}
   info.request.headers.forEach((value, key) => (headers[key] = value))
   return {
     method: info.request.method,

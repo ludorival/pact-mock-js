@@ -12,7 +12,7 @@ export const pact = new Pact(
     headersConfig: {
       includes: ['content-type'],
     },
-  }
+  },
 )
 export const todosWillRaiseTechnicalFailure = http.post(
   '*/graphql',
@@ -22,7 +22,7 @@ export const todosWillRaiseTechnicalFailure = http.post(
     response: {
       status: 500,
     },
-  })
+  }),
 )
 export const emptyTodos = graphql.query(
   'todos',
@@ -36,7 +36,7 @@ export const emptyTodos = graphql.query(
         },
       },
     },
-  })
+  }),
 )
 // I can pass directly the body here, the status and description will be resolved automatically
 export const multipleTodos = graphql.query(
@@ -64,7 +64,7 @@ export const multipleTodos = graphql.query(
         },
       ],
     },
-  })
+  }),
 )
 
 export const todoByIdFound = graphql.query(
@@ -85,7 +85,7 @@ export const todoByIdFound = graphql.query(
         },
       },
     },
-  })
+  }),
 )
 
 export const todoByIdNotFound = graphql.query(
@@ -98,7 +98,7 @@ export const todoByIdNotFound = graphql.query(
         errors: [{ message: 'The todo item 1 is not found' } as GraphQLError],
       },
     },
-  })
+  }),
 )
 // I can use the transformers, if I want to add my own transform
 
@@ -122,6 +122,6 @@ export const createTodoWillSucceed = graphql.mutation(
           },
         },
       },
-      info
-    )
+      info,
+    ),
 )

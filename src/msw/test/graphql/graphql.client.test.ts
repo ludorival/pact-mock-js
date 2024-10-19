@@ -48,7 +48,7 @@ describe('To-Do list GraphQL API client', () => {
       await fetchTodos().catch((e) =>
         expect(e).toMatchObject({
           message: 'Request failed with status code 500',
-        })
+        }),
       )
       server.resetHandlers(emptyTodos)
 
