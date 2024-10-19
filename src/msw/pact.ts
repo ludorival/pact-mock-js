@@ -1,9 +1,10 @@
+import { omit } from 'lodash'
 import {
-  GraphQLContext,
-  MockedRequest,
-  ResponseResolver,
-  ResponseTransformer,
-  RestContext,
+  DefaultBodyType,
+  HttpResponse,
+  HttpResponseInit,
+  StrictRequest,
+  StrictResponse,
 } from 'msw'
 import { Pact as BasePact, buildResponse } from '../core'
 import {
@@ -18,41 +19,43 @@ import {
   Request,
   ToRecordInteraction,
 } from '../types'
-import { GraphQLPayload, GraphQLResponse } from './types'
-
+type Info<
+  R extends DefaultBodyType = DefaultBodyType,
+  Extra extends Record<string, unknown> = Record<string, unknown>,
+> = {
+  request: StrictRequest<R>
+} & Extra
 export class Pact<P extends PactFile> extends BasePact<P> {
   constructor(pact: InputPact<P>, options?: Options) {
     super(pact, options)
   }
 
-  toResolver<T extends object>(
+  toResolver<T extends object, R extends DefaultBodyType = DefaultBodyType>(
     input: MinimalInteraction<InteractionFor<P, T>> | T,
-    once?: boolean
-  ): ResponseResolver<
-    MockedRequest,
-    GraphQLContext<GraphQLPayload> | RestContext
-  > {
+  ): (info: Info<R>) => Promise<StrictResponse<T>> {
     const version = this.version
-    return async (req, res, ctx) => {
+    return async (info) => {
       const interaction =
         'response' in input ? input : buildResponse(input, version)
-      const transformers = await this.toTransformers(
+      const response = await this.toResponse(
         interaction as MinimalInteraction<InteractionFor<P, T>>,
-        req,
-        ctx
+        info,
       )
-      if (once) return res.once(...transformers)
-      else return res(...transformers)
+      return response
     }
   }
-  async toTransformers(
-    interaction: MinimalInteraction<InteractionFor<P>>,
-    req: MockedRequest,
-    context: GraphQLContext<GraphQLPayload> | RestContext
-  ): Promise<ResponseTransformer[]> {
+
+  async toResponse<
+    TResponse extends DefaultBodyType,
+    TRequest extends DefaultBodyType = DefaultBodyType,
+  >(
+    interaction: MinimalInteraction<InteractionFor<P, TResponse>>,
+    info: Info<TRequest>,
+    initOptions?: HttpResponseInit,
+  ): Promise<StrictResponse<TResponse>> {
     const toRecord = {
       ...interaction,
-      request: await toRequest(req),
+      request: await toRequest(info),
     } as ToRecordInteraction<InteractionFor<P>>
     this.record(toRecord)
 
@@ -64,43 +67,32 @@ export class Pact<P extends PactFile> extends BasePact<P> {
       ? null
       : (interaction.response as PactV2.Response | PactV3.Response)
     const content = responseV4?.body?.content || response?.body
-    const graphQLResponse = content?.errors
-      ? (content as GraphQLResponse)
-      : content?.data
-      ? (content as GraphQLResponse)
-      : null
+
     const responseStatus = responseV4?.status || response?.status || 200
-    if (graphQLResponse?.errors && 'errors' in context) {
-      return [context.errors(graphQLResponse.errors)]
-    } else if (graphQLResponse?.data && 'data' in context) {
-      return [context.data(graphQLResponse.data)]
-    } else if ('json' in context) {
-      return [
-        context.status(responseStatus),
-        ...(content && (typeof content === 'object' || Array.isArray(content))
-          ? [context.json(content)]
-          : content
-          ? [context.body(content.toString())]
-          : []),
-      ]
-    } else {
-      return [context.status(responseStatus)]
-    }
+
+    return HttpResponse.json(content, {
+      headers: response?.headers || responseV4?.headers,
+      status: responseStatus,
+      ...initOptions,
+    })
   }
 }
 
-async function toRequest(req: MockedRequest): Promise<Request> {
-  const path = req.url.pathname
-  const query = req.url.searchParams.toString() || undefined
-  const body: Body = await req
-    .json()
-    .catch(() => req.text())
-    .catch(() => undefined)
-
+async function toRequest<R extends DefaultBodyType = DefaultBodyType>(
+  info: Info<R>,
+): Promise<Request> {
+  const url = new URL(info.request.url)
+  const path = url.pathname
+  const query = url.searchParams.toString() || undefined
+  const body = info.query
+    ? omit(info, 'request', 'requestId')
+    : await info.request.json().catch(() => info.request.body)
+  const headers: Record<string, unknown> = {}
+  info.request.headers.forEach((value, key) => (headers[key] = value))
   return {
-    method: req.method,
+    method: info.request.method,
     path,
-    headers: req.headers.all(),
+    headers,
     body,
     query,
   } as Request

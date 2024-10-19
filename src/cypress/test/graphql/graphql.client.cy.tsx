@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react'
 import { mount } from '@cypress/react'
 import * as props from '../../../test/graphql.client'
@@ -25,7 +24,7 @@ after(() => {
   cy.writeFile(`pacts/${pact.name}.json`, pactFile)
   cy.fixture('test-consumer-graphql-provider.json').then((expectedPact) => {
     expect(omitVersion(pactFile)).to.deep.equal(
-      omitVersion(expectedPact, false)
+      omitVersion(expectedPact, false),
     )
   })
 })
@@ -53,7 +52,7 @@ describe('To-Do list GraphQL API client', () => {
       })
       // use todosWillRaiseTechnicalFailure and emptyTodos handlers from contracts
       cy.intercept('POST', `/graphql`, todosWillRaiseTechnicalFailure).as(
-        'todosWillRaiseTechnicalFailure'
+        'todosWillRaiseTechnicalFailure',
       )
       // Mount the TodoList to fetchTodos function and get the actual data
       mount(<TodoList {...props} />)
@@ -78,7 +77,7 @@ describe('To-Do list GraphQL API client', () => {
     it('should create a new To-Do item', () => {
       // use createTodoWillSucceed handlers from contracts
       cy.intercept('POST', `/graphql`, createTodoWillSucceed).as(
-        'createTodoWillSucceed'
+        'createTodoWillSucceed',
       )
 
       // mount the CreateTodo and get the actual data

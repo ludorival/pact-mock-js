@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { setupServer } from 'msw/node'
 import {
   pact,
@@ -25,8 +24,6 @@ afterEach(() => {
 
 afterAll(() => {
   server.close()
-  const pactFile = pact.generatePactFile()
-  expect(omitVersion(pactFile)).toMatchSnapshot()
 })
 
 describe('To-Do list GraphQL API client', () => {
@@ -44,15 +41,18 @@ describe('To-Do list GraphQL API client', () => {
 
     it('should get a technical failure the first time and an empty todo list', async () => {
       // use todosWillRaiseTechnicalFailure and emptyTodos handlers from contracts
-      server.use(todosWillRaiseTechnicalFailure, emptyTodos)
+      server.use(todosWillRaiseTechnicalFailure)
 
       // call first time fetchTodos should return an error
       expect.assertions(2)
-      fetchTodos().catch((e) =>
+      await fetchTodos().catch((e) =>
         expect(e).toMatchObject({
           message: 'Request failed with status code 500',
-        })
+        }),
       )
+
+      server.resetHandlers(emptyTodos)
+
       // call the fetchTodos function and get the actual data
       const actualData = await fetchTodos()
 
@@ -101,4 +101,8 @@ describe('To-Do list GraphQL API client', () => {
       }
     })
   })
+})
+it('the pact file can be generated and match with the snapshot', () => {
+  const pactFile = pact.generatePactFile()
+  expect(omitVersion(pactFile)).toMatchSnapshot()
 })

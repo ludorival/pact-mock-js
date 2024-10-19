@@ -14,7 +14,7 @@ describe('PactV2', () => {
         excludes: ['Authorization'],
       },
       basePath: 'base',
-    }
+    },
   )
 
   afterEach(() => {
@@ -77,7 +77,6 @@ describe('PactV2', () => {
     })
 
     const pactFile = pact.generatePactFile()
-    console.log(JSON.stringify(pactFile, null, 2))
     expect(omitVersion(pactFile)).toMatchSnapshot()
   })
 })

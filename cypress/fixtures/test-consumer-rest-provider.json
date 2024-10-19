@@ -11,7 +11,7 @@
     },
     "client": {
       "name": "pact-mock-js",
-      "version": "1.1.1"
+      "version": "1.2.0"
     }
   },
   "interactions": [
@@ -63,7 +63,7 @@
       }
     },
     {
-      "description": "graphql api returns a 500 http error",
+      "description": "rest api returns a 500 http error",
       "providerState": "will return a 500 http error",
       "response": {
         "status": 500

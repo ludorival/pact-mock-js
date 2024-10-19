@@ -12,7 +12,7 @@ export const pact = new Pact(
     headersConfig: {
       includes: ['content-type'],
     },
-  }
+  },
 )
 export const todosWillRaiseTechnicalFailure = pact.toHandler({
   operationName: 'todos',
@@ -108,6 +108,6 @@ export const createTodoWillSucceed: RouteHandlerController = (req) =>
           },
         },
       },
-      req
-    )
+      req,
+    ),
   )

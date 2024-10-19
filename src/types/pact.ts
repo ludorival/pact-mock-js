@@ -25,14 +25,14 @@ export type Version =
 export type InteractionFor<
   P extends PactFile,
   TResponse = unknown,
-  TRequest = unknown
+  TRequest = unknown,
 > = P extends PactV2.PactFile
   ? PactV2.Interaction<TResponse, TRequest>
   : P extends PactV3.PactFile
-  ? PactV3.Interaction<TResponse, TRequest>
-  : P extends PactV4.PactFile
-  ? PactV4.Interaction<TResponse, TRequest>
-  : never
+    ? PactV3.Interaction<TResponse, TRequest>
+    : P extends PactV4.PactFile
+      ? PactV4.Interaction<TResponse, TRequest>
+      : never
 
 export type InputPact<P extends PactFile> = Partial<P> &
   Pick<P, 'consumer' | 'provider' | 'metadata'>

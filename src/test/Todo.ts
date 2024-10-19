@@ -14,5 +14,5 @@ export type TodoByIdApi = (id: string) => Promise<Todo>
 // Type pour la fonction createTodo
 export type CreateTodoApi = (
   title: string,
-  description?: string
+  description?: string,
 ) => Promise<Todo>
