@@ -10,7 +10,6 @@ import {
   todoByIdNotFound,
   todosWillRaiseTechnicalFailure,
 } from './handlers'
-import { writeFileSync } from 'fs'
 
 const server = setupServer()
 
@@ -26,10 +25,6 @@ afterEach(() => {
 afterAll(async () => {
   server.close()
   const pactFile = pact.generatePactFile()
-  writeFileSync(
-    `pacts/${pact.name}-msw.json`,
-    JSON.stringify(pactFile, null, 2)
-  )
   expect(omitVersion(pactFile)).toMatchSnapshot()
 })
 

@@ -10,7 +10,6 @@ import {
 } from './handlers'
 import { createTodo, fetchTodos, todoById } from '../../../test/rest.client'
 import { omitVersion } from '../../../test/utils'
-import { writeFileSync } from 'fs'
 
 const server = setupServer()
 
@@ -27,10 +26,6 @@ afterAll(() => {
   server.close()
   console.warn('Generating pact file')
   const pactFile = pact.generatePactFile()
-  writeFileSync(
-    `pacts/${pact.name}-msw.json`,
-    JSON.stringify(pactFile, null, 2)
-  )
   expect(omitVersion(pactFile)).toMatchSnapshot()
 })
 
