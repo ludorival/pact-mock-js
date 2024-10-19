@@ -84,7 +84,7 @@ async function toRequest<R extends DefaultBodyType = DefaultBodyType>(
   info: Info<R>
 ): Promise<Request> {
   const url = new URL(info.request.url)
-  const path = url.password
+  const path = url.pathname
   const query = url.searchParams.toString() || undefined
   const body = info.query
     ? omit(info, 'request', 'requestId')

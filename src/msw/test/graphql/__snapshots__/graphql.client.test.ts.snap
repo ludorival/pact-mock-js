@@ -51,6 +51,8 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
       "description": "empty todo list",
       "request": {
         "body": {
+          "cookies": {},
+          "operationName": "todos",
           "query": "
     query todos {
       todos {
@@ -61,10 +63,9 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
       }
     }
   ",
+          "variables": {},
         },
-        "headers": {
-          "content-type": "application/json",
-        },
+        "headers": {},
         "method": "POST",
         "path": "/graphql",
         "query": undefined,
@@ -94,9 +95,7 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
     }
   ",
         },
-        "headers": {
-          "content-type": "application/json",
-        },
+        "headers": {},
         "method": "POST",
         "path": "/graphql",
         "query": undefined,
@@ -109,6 +108,8 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
       "description": "POST /graphql returns status 200",
       "request": {
         "body": {
+          "cookies": {},
+          "operationName": "todos",
           "query": "
     query todos {
       todos {
@@ -119,10 +120,9 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
       }
     }
   ",
+          "variables": {},
         },
-        "headers": {
-          "content-type": "application/json",
-        },
+        "headers": {},
         "method": "POST",
         "path": "/graphql",
         "query": undefined,
@@ -159,6 +159,8 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
       "description": "should create a Todo with success",
       "request": {
         "body": {
+          "cookies": {},
+          "operationName": "createTodo",
           "query": "
     mutation createTodo($title: String!, $description: String) {
       createTodo(input: { title: $title, description: $description }) {
@@ -173,9 +175,7 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
             "title": "Buy groceries",
           },
         },
-        "headers": {
-          "content-type": "application/json",
-        },
+        "headers": {},
         "method": "POST",
         "path": "/graphql",
         "query": undefined,
@@ -199,6 +199,8 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
       "providerState": "there is an existing todo item with this id",
       "request": {
         "body": {
+          "cookies": {},
+          "operationName": "todoById",
           "query": "
     query todoById($id: ID) {
       todoById(id: $id) {
@@ -213,9 +215,7 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
             "id": "1",
           },
         },
-        "headers": {
-          "content-type": "application/json",
-        },
+        "headers": {},
         "method": "POST",
         "path": "/graphql",
         "query": undefined,
@@ -238,6 +238,8 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
       "description": "should not found a todo item by its id",
       "request": {
         "body": {
+          "cookies": {},
+          "operationName": "todoById",
           "query": "
     query todoById($id: ID) {
       todoById(id: $id) {
@@ -252,9 +254,7 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
             "id": "1",
           },
         },
-        "headers": {
-          "content-type": "application/json",
-        },
+        "headers": {},
         "method": "POST",
         "path": "/graphql",
         "query": undefined,

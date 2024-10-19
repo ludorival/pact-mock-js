@@ -18,7 +18,7 @@ export const todosWillRaiseTechnicalFailure = http.get(
   '*/todos',
   pact.toResolver({
     providerState: 'will return a 500 http error',
-    description: 'graphql api returns a 500 http error',
+    description: 'rest api returns a 500 http error',
     response: {
       status: 500,
     },

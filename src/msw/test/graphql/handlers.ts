@@ -15,7 +15,7 @@ export const pact = new Pact(
   }
 )
 export const todosWillRaiseTechnicalFailure = http.post(
-  '/graphql',
+  '*/graphql',
   pact.toResolver({
     providerState: 'will return a 500 http error',
     description: 'graphql api returns a 500 http error',

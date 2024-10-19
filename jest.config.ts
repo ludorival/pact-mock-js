@@ -20,6 +20,6 @@ const config: Config = {
   },
   coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
   testEnvironment: 'node',
-  reporters: [['github-actions', { silent: false }], 'default'],
+  reporters: [['github-actions', { silent: false }], 'summary'],
 }
 export default config

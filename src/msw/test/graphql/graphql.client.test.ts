@@ -10,6 +10,7 @@ import {
   todoByIdNotFound,
   todosWillRaiseTechnicalFailure,
 } from './handlers'
+import { writeFileSync } from 'fs'
 
 const server = setupServer()
 
@@ -25,6 +26,10 @@ afterEach(() => {
 afterAll(async () => {
   server.close()
   const pactFile = pact.generatePactFile()
+  writeFileSync(
+    `pacts/${pact.name}-msw.json`,
+    JSON.stringify(pactFile, null, 2)
+  )
   expect(omitVersion(pactFile)).toMatchSnapshot()
 })
 
@@ -46,8 +51,8 @@ describe('To-Do list GraphQL API client', () => {
       server.use(todosWillRaiseTechnicalFailure)
 
       // call first time fetchTodos should return an error
-      expect.assertions(1)
-      fetchTodos().catch((e) =>
+      expect.assertions(2)
+      await fetchTodos().catch((e) =>
         expect(e).toMatchObject({
           message: 'Request failed with status code 500',
         })
