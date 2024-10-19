@@ -41,7 +41,7 @@ exports[`To-Do list GraphQL API client todoById should get a todo by its id 1`] 
 }
 `;
 
-exports[`To-Do list GraphQL API client todoById should get an error when getting a todo does not found it 1`] = `
+exports[`the pact file can be generated and match with the snapshot 1`] = `
 {
   "consumer": {
     "name": "test-consumer",

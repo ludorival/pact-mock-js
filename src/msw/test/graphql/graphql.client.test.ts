@@ -24,8 +24,6 @@ afterEach(() => {
 
 afterAll(async () => {
   server.close()
-  const pactFile = pact.generatePactFile()
-  expect(omitVersion(pactFile)).toMatchSnapshot()
 })
 
 describe('To-Do list GraphQL API client', () => {
@@ -100,4 +98,8 @@ describe('To-Do list GraphQL API client', () => {
       }
     })
   })
+})
+it('the pact file can be generated and match with the snapshot', () => {
+  const pactFile = pact.generatePactFile()
+  expect(omitVersion(pactFile)).toMatchSnapshot()
 })
