@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { setupServer } from 'msw/node'
-import { createTodo, fetchTodos, todoById } from './graphql.client'
+import { createTodo, fetchTodos, todoById } from '../../../test/graphql.client'
+import { omitVersion } from '../../../test/utils'
 import {
   createTodoWillSucceed,
   emptyTodos,
@@ -25,7 +26,7 @@ afterEach(() => {
 afterAll(async () => {
   server.close()
   const pactFile = pact.generatePactFile()
-  expect(pactFile).toMatchSnapshot()
+  expect(omitVersion(pactFile)).toMatchSnapshot()
 })
 
 describe('To-Do list GraphQL API client', () => {

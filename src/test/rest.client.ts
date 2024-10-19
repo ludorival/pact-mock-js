@@ -1,7 +1,7 @@
 import axios, { Method } from 'axios'
-import { Todo } from '../Todo'
+import { CreateTodoApi, FetchTodosApi, TodoByIdApi } from './Todo'
 
-const url = 'https://pact.msw.example.com/api'
+const url = 'https://pact-mock-js.example.com/api'
 
 async function rest<TData, TVariables = unknown>({
   method,
@@ -21,23 +21,17 @@ async function rest<TData, TVariables = unknown>({
   return response
 }
 // define a function to fetch all To-Do items
-export async function fetchTodos(): Promise<Todo[]> {
-  // return the array of To-Do items
-  return await rest({ method: 'get', path: '/todos' })
-}
+export const fetchTodos: FetchTodosApi = () =>
+  rest({ method: 'get', path: '/todos' })
 
 // define a function to fetch all To-Do items
-export async function todoById(id: string): Promise<Todo> {
-  // return the To-Do items
+export const todoById: TodoByIdApi = (id) =>
+  rest({ method: 'get', path: `/todos/${id}` })
 
-  return await rest({ method: 'get', path: `/todos/${id}` })
-}
 // define a function to create a new To-Do item
-export async function createTodo(title: string, description?: string) {
-  // return the newly created To-Do item
-  return await rest({
+export const createTodo: CreateTodoApi = (title, description) =>
+  rest({
     method: 'post',
     path: `/todos`,
     body: { title, description },
   })
-}

@@ -272,6 +272,9 @@ exports[`To-Do list GraphQL API client todoById should get an error when getting
     },
   ],
   "metadata": {
+    "client": {
+      "name": "pact-mock-js",
+    },
     "pactSpecification": {
       "version": "2.0.0",
     },
