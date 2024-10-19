@@ -89,11 +89,12 @@ async function toRequest<R extends DefaultBodyType = DefaultBodyType>(
   const body = info.query
     ? omit(info, 'request', 'requestId')
     : await info.request.json().catch((e) => info.request.body)
-
+  const headers: Record<string, any> = {}
+  info.request.headers.forEach((value, key) => (headers[key] = value))
   return {
     method: info.request.method,
     path,
-    headers: info.request.headers,
+    headers,
     body,
     query,
   } as Request

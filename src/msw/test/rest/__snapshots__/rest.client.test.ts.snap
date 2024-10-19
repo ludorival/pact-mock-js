@@ -114,7 +114,9 @@ exports[`the pact file can be generated and match with the snapshot 1`] = `
         "body": {
           "title": "Buy groceries",
         },
-        "headers": {},
+        "headers": {
+          "content-type": "application/json",
+        },
         "method": "POST",
         "path": "/api/todos",
         "query": undefined,
