@@ -23,6 +23,7 @@ jobs:
       - run: npm install yarn -g
       - run: yarn install
       - run: yarn test
+      - run: yarn cypress
 
   cypress-run:
     runs-on: ubuntu-24.04
