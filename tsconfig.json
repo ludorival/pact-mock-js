@@ -1,10 +1,6 @@
 {
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
-    "baseUrl": "src",
-    "paths": {
-      "@pact-mock-js/msw": ["index.ts"]
-    },
     "resolveJsonModule": true,
     /* Basic Options */
     // "incremental": true,                   /* Enable incremental compilation */
@@ -13,7 +9,7 @@
     // "lib": [],                             /* Specify library files to be included in the compilation. */
     // "allowJs": true,                       /* Allow javascript files to be compiled. */
     // "checkJs": true,                       /* Report errors in .js files. */
-    // "jsx": "preserve",                     /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
+    "jsx": "react-jsx",                       /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */
     "declaration": true,                   /* Generates corresponding '.d.ts' file. */
     // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
     "sourceMap": true,                     /* Generates corresponding '.map' file. */
@@ -50,7 +46,7 @@
     // "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
     // "paths": {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
     "rootDirs": ["src"],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
-    "types": ["node","jest"],                           /* Type declaration files to be included in compilation. */
+    "types": ["node"],                           /* Type declaration files to be included in compilation. */
     // "allowSyntheticDefaultImports": true,  /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
     "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     // "preserveSymlinks": true,              /* Do not resolve the real path of symlinks. */
@@ -69,9 +65,11 @@
     /* Advanced Options */
     "skipLibCheck": true,                     /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true,  /* Disallow inconsistently-cased references to the same file. */
-    "typeRoots": [
-      "./node_modules/@types", // Types installés au niveau racine
-      "./packages/*/node_modules/@types" // Types dans chaque sous-package
-    ]
-  }
-}
+  },
+  "include": ["src/**/*.ts", "src/cypress/test/rest/rest.client.cy.tsx", "src/cypress/test/graphql/graphql.client.cy.tsx"],    
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts",  // Exclure les fichiers de test Jest
+    "**/*.cy.ts"     // Exclure les fichiers de test Cypress
+  ]}

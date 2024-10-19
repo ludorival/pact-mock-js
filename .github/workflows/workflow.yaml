@@ -13,47 +13,42 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install yarn
+      - run: npm install yarn -g
       - run: yarn install
-      - run: yarn build
       - run: yarn test
 
   deploy:
-    needs: build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
     permissions:
       contents: read
       packages: write
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install yarn
+      - run: npm install yarn -g
       - run: yarn install
       - run: yarn build
 
       - name: Git status
         run: git status
         # Publishing to NPM
-      - name: Publish with Lerna
-        run: |
-          # Authentification with NPM
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
-          npx lerna publish from-package --yes
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
 
   create-release:
     needs: deploy

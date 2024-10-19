@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["jest"]  // Utiliser uniquement les types Jest ici
+  },
+  "include": ["**/*.test.ts"]  // Inclure uniquement les fichiers de test Jest
+}

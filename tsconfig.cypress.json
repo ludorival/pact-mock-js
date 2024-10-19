@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["cypress"]  // Utiliser uniquement les types Cypress ici
+  },
+  "include": ["**/*.cy.ts"]  // Inclure uniquement les fichiers de test Cypress
+}

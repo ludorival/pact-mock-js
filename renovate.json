@@ -5,6 +5,10 @@
  "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "Upgrade everything",
+      "groupSlug": "upgrade-everything",
+      "matchPackagePatterns": ["*"],
+      "excludePackageNames": ["msw"],
       "automerge": true
     }
   ]
