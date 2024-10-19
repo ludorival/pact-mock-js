@@ -28,7 +28,7 @@ export class Pact<P extends PactFile> extends BasePact<P> {
   }
 
   toHandler<T extends object>(
-    input: MinimalInteraction<InteractionFor<P, T>> | T
+    input: MinimalInteraction<InteractionFor<P, T>> | T,
   ): RouteHandlerController {
     const version = this.version
     return (req) => {
@@ -37,14 +37,14 @@ export class Pact<P extends PactFile> extends BasePact<P> {
       req.reply(
         this.recordResponse(
           interaction as MinimalInteraction<InteractionFor<P, T>>,
-          req
-        )
+          req,
+        ),
       )
     }
   }
   recordResponse(
     interaction: MinimalInteraction<InteractionFor<P>>,
-    req: CyHttpMessages.IncomingHttpRequest
+    req: CyHttpMessages.IncomingHttpRequest,
   ): StaticResponse {
     const request = toRequest(req)
     this.record({ ...interaction, request } as ToRecordInteraction<

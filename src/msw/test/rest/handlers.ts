@@ -1,5 +1,5 @@
+import { http } from 'msw'
 import { Pact } from '../../pact'
-import { rest } from 'msw'
 
 export const pact = new Pact(
   {
@@ -14,21 +14,17 @@ export const pact = new Pact(
     },
   }
 )
-export const todosWillRaiseTechnicalFailure = rest.get(
+export const todosWillRaiseTechnicalFailure = http.get(
   '*/todos',
-  pact.toResolver(
-    {
-      providerState: 'will return a 500 http error',
-      description: 'graphql api returns a 500 http error',
-      response: {
-        status: 500,
-      },
+  pact.toResolver({
+    providerState: 'will return a 500 http error',
+    description: 'graphql api returns a 500 http error',
+    response: {
+      status: 500,
     },
-    // here I can pass once = true to perform only once this resolver
-    true
-  )
+  })
 )
-export const emptyTodos = rest.get(
+export const emptyTodos = http.get(
   '*/todos',
   pact.toResolver({
     description: 'empty todo list',
@@ -39,7 +35,7 @@ export const emptyTodos = rest.get(
   })
 )
 // I can pass directly the body here, the status and description will be resolved automatically
-export const multipleTodos = rest.get(
+export const multipleTodos = http.get(
   '*/todos',
   pact.toResolver([
     {
@@ -63,7 +59,7 @@ export const multipleTodos = rest.get(
   ])
 )
 
-export const todoByIdFound = rest.get(
+export const todoByIdFound = http.get(
   '*/todos/*',
   pact.toResolver({
     description: 'should found a todo item by its id',
@@ -80,7 +76,7 @@ export const todoByIdFound = rest.get(
   })
 )
 
-export const todoByIdNotFound = rest.get(
+export const todoByIdNotFound = http.get(
   '*/todos/*',
   pact.toResolver({
     description: 'should not found a todo item by its id',
@@ -91,26 +87,22 @@ export const todoByIdNotFound = rest.get(
   })
 )
 // I can use the transformers, if I want to add my own transform
-export const createTodoWillSucceed = rest.post(
+export const createTodoWillSucceed = http.post(
   '*/todos',
-  async (req, res, ctx) =>
-    res(
-      ctx.cookie('my-cookie', 'value'),
-      ...(await pact.toTransformers(
-        {
-          description: 'should create a Todo with success',
-          response: {
-            status: 201,
-            body: {
-              id: '1',
-              title: 'Buy groceries',
-              description: 'Milk, bread, eggs, cheese',
-              completed: false,
-            },
+  async (info) =>
+    await pact.toResponse(
+      {
+        description: 'should create a Todo with success',
+        response: {
+          status: 201,
+          body: {
+            id: '1',
+            title: 'Buy groceries',
+            description: 'Milk, bread, eggs, cheese',
+            completed: false,
           },
         },
-        req,
-        ctx
-      ))
+      },
+      info
     )
 )

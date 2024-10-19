@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { setupServer } from 'msw/node'
 import { createTodo, fetchTodos, todoById } from '../../../test/graphql.client'
 import { omitVersion } from '../../../test/utils'
@@ -44,15 +43,17 @@ describe('To-Do list GraphQL API client', () => {
 
     it('should get a technical failure the first time and an empty todo list', async () => {
       // use todosWillRaiseTechnicalFailure and emptyTodos handlers from contracts
-      server.use(todosWillRaiseTechnicalFailure, emptyTodos)
+      server.use(todosWillRaiseTechnicalFailure)
 
       // call first time fetchTodos should return an error
-      expect.assertions(2)
+      expect.assertions(1)
       fetchTodos().catch((e) =>
         expect(e).toMatchObject({
           message: 'Request failed with status code 500',
         })
       )
+      server.resetHandlers(emptyTodos)
+
       // call the fetchTodos function and get the actual data
       const actualData = await fetchTodos()
 

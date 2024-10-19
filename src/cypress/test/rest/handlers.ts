@@ -12,7 +12,7 @@ export const pact = new Pact(
     headersConfig: {
       includes: ['content-type'],
     },
-  }
+  },
 )
 export const todosWillRaiseTechnicalFailure = pact.toHandler({
   providerState: 'will return a 500 http error',
@@ -89,6 +89,6 @@ export const createTodoWillSucceed: RouteHandlerController = (req) =>
           },
         },
       },
-      req
-    )
+      req,
+    ),
   )

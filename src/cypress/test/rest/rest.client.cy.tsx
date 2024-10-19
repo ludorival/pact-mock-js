@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { mount } from '@cypress/react'
 import * as props from '../../../test/rest.client'
 import CreateTodo from '../CreateTodo'
@@ -24,7 +23,7 @@ after(() => {
   cy.writeFile(`pacts/${pact.name}.json`, pactFile)
   cy.fixture('test-consumer-rest-provider.json').then((expectedPact) => {
     expect(omitVersion(pactFile)).to.deep.equal(
-      omitVersion(expectedPact, false)
+      omitVersion(expectedPact, false),
     )
   })
 })
@@ -51,7 +50,7 @@ describe('To-Do list GraphQL API client', () => {
       })
       // use todosWillRaiseTechnicalFailure and emptyTodos handlers from contracts
       cy.intercept('GET', '/api/todos', todosWillRaiseTechnicalFailure).as(
-        'todosWillRaiseTechnicalFailure'
+        'todosWillRaiseTechnicalFailure',
       )
       // Mount the TodoList to fetchTodos function and get the actual data
       mount(<TodoList {...props} />)
@@ -74,7 +73,7 @@ describe('To-Do list GraphQL API client', () => {
     it('should create a new To-Do item', () => {
       // use createTodoWillSucceed handlers from contracts
       cy.intercept('POST', '/api/todos', createTodoWillSucceed).as(
-        'createTodoWillSucceed'
+        'createTodoWillSucceed',
       )
 
       // mount the CreateTodo and get the actual data
@@ -115,7 +114,7 @@ describe('To-Do list GraphQL API client', () => {
       })
       // use todoByIdFound handlers from contracts
       cy.intercept('GET', '/api/todos/*', todoByIdNotFound).as(
-        'todoByIdNotFound'
+        'todoByIdNotFound',
       )
 
       // mount the TodoDetails and get the actual data

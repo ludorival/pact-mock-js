@@ -21,7 +21,10 @@ function pactName<P extends PactFile>(pact: InputPact<P>) {
 }
 export class Pact<T extends PactFile = PactV2.PactFile> {
   private interactions: Record<string, InteractionFor<T>> = {}
-  constructor(private pact: InputPact<T>, private options?: Options) {
+  constructor(
+    private pact: InputPact<T>,
+    private options?: Options,
+  ) {
     if (!pact.metadata?.pactSpecification?.version)
       throw new Error(`The version is missing in the Pact. Please provide the right version like
     { consumer: { name : 'my-consumer'}, provider : { name: 'my-provider'},
@@ -36,7 +39,7 @@ export class Pact<T extends PactFile = PactV2.PactFile> {
   }
 
   record<TResponse = unknown, TRequest = unknown>(
-    input: ToRecordInteraction<InteractionFor<T, TResponse, TRequest>>
+    input: ToRecordInteraction<InteractionFor<T, TResponse, TRequest>>,
   ) {
     const request = input.request as Request
     const response = input.response as { status?: number }
@@ -57,7 +60,7 @@ export class Pact<T extends PactFile = PactV2.PactFile> {
       JSON.stringify(existingInteraction) !== JSON.stringify(interaction)
     ) {
       console.warn(
-        `The interaction ${description} already exists but with different content. It is recommended that the interaction stays deterministic.`
+        `The interaction ${description} already exists but with different content. It is recommended that the interaction stays deterministic.`,
       )
     }
     this.interactions[description] = interaction
@@ -97,7 +100,7 @@ export class Pact<T extends PactFile = PactV2.PactFile> {
 
 const omitHeaders = (
   headers: HeaderType,
-  headersConfig: HeadersConfig = {}
+  headersConfig: HeadersConfig = {},
 ) => {
   const blocklist = headersConfig.excludes || []
   if (headersConfig.includes) {
