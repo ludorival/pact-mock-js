@@ -24,7 +24,9 @@ after(() => {
   const pactFile = pact.generatePactFile()
   cy.writeFile(`pacts/${pact.name}.json`, pactFile)
   cy.fixture('test-consumer-graphql-provider.json').then((expectedPact) => {
-    expect(omitVersion(pactFile)).to.deep.equal(omitVersion(expectedPact))
+    expect(omitVersion(pactFile)).to.deep.equal(
+      omitVersion(expectedPact, false)
+    )
   })
 })
 
