@@ -17,12 +17,16 @@
   },
   "exports": {
     "./core": {
-      "default": "./dist/core/index.js",
-      "types": "./dist/core/index.d.ts"
+      "default": "./dist/src/core/index.js",
+      "types": "./dist/src/core/index.d.ts"
     },
     "./msw": {
-      "default": "./dist/msw/index.js",
-      "types": "./dist/msw/index.d.ts"
+      "default": "./dist/src/msw/index.js",
+      "types": "./dist/src/msw/index.d.ts"
+    },
+    "./cypress": {
+      "default": "./dist/src/cypress/index.js",
+      "types": "./dist/src/cypress/index.d.ts"
     }
   },
   "files": [
@@ -36,7 +40,7 @@
     "clean:all": "npm run clean && (rm -r ./node_modules || true)",
     "cover": "yarn test --coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-    "postversion": "yarn cover -u && git commit . -m \"update snapshots after changing version\" && git push && git push --tags",
+    "postversion": "git push && git push --tags",
     "prepublishOnly": "yarn build",
     "test": "jest && npm run cypress",
     "cypress": "cypress run --component",
@@ -44,9 +48,9 @@
     "upgrade": "npx npm-check -u",
     "preversion": "yarn test",
     "version": "yarn build",
-    "patch": "npm version patch --no-git-tag-version",
-    "minor": "npm version minor --no-git-tag-version",
-    "major": "npm version major --no-git-tag-version"
+    "patch": "npm version patch",
+    "minor": "npm version minor",
+    "major": "npm version major"
   },
   "devDependencies": {
     "@cypress/react": "^8.0.2",

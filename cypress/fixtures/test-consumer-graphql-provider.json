@@ -8,6 +8,10 @@
   "metadata": {
     "pactSpecification": {
       "version": "2.0.0"
+    },
+    "client": {
+      "name": "pact-mock-js",
+      "version": "1.1.1"
     }
   },
   "interactions": [
