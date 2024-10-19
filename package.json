@@ -38,7 +38,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "postversion": "yarn cover -u && git commit . -m \"update snapshots after changing version\" && git push && git push --tags",
     "prepublishOnly": "yarn build",
-    "test": "jest",
+    "test": "jest && npm run cypress",
     "cypress": "cypress run --component",
     "cypress:open": "cypress open",
     "upgrade": "npx npm-check -u",

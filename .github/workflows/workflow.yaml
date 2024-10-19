@@ -23,17 +23,7 @@ jobs:
       - run: npm install yarn -g
       - run: yarn install
       - run: yarn test
-      - run: yarn cypress
 
-  cypress-run:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Cypress run
-        uses: ./
-        with:
-          component: true
   deploy:
     needs: build
     runs-on: ubuntu-latest
